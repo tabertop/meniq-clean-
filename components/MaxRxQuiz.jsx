@@ -1528,6 +1528,8 @@ function getMenIQCategory(quizId, score) {
 
 function Result({ quiz, result, tracking, onRestart }) {
   const [filled, setFilled] = useState(false);
+  const [showTransition, setShowTransition] = useState(false);
+  const [checkStep, setCheckStep] = useState(0);
   useEffect(() => { setTimeout(() => setFilled(true), 80); }, []);
   const ctaUrl = buildCTAUrl(quiz.ctaBase, tracking);
 
@@ -1538,14 +1540,21 @@ function Result({ quiz, result, tracking, onRestart }) {
     const finalUrl = papAid && !ctaUrl.includes("a_aid=")
       ? ctaUrl + (ctaUrl.includes("?") ? "&" : "?") + "a_aid=" + papAid
       : ctaUrl;
-    // Detect sandbox/iframe env — open new tab to avoid white screen
-    // In production (top-level window) this navigates same tab as intended
-    const inIframe = (() => { try { return window.self !== window.top; } catch(_) { return true; } })();
-    if (inIframe) {
-      window.open(finalUrl, "_blank", "noopener,noreferrer");
-    } else {
-      window.location.href = finalUrl;
-    }
+    // Show transition overlay, then redirect after 2.5s
+    setShowTransition(true);
+    setCheckStep(0);
+    setTimeout(() => setCheckStep(1), 600);
+    setTimeout(() => setCheckStep(2), 1200);
+    setTimeout(() => setCheckStep(3), 1800);
+    setTimeout(() => {
+      const inIframe = (() => { try { return window.self !== window.top; } catch(_) { return true; } })();
+      if (inIframe) {
+        window.open(finalUrl, "_blank", "noopener,noreferrer");
+        setShowTransition(false);
+      } else {
+        window.location.href = finalUrl;
+      }
+    }, 2600);
   }
 
   return (
@@ -1668,6 +1677,30 @@ function Result({ quiz, result, tracking, onRestart }) {
         {tracking.affiliate ? ` - Ref: ${tracking.affiliate}` : ""}
       </p>
     </div>
+    {showTransition && (
+      <div className="mrx-transition-overlay">
+        <div className="mrx-overlay-spinner" />
+        <p className="mrx-transition-msg">Connecting you with a licensed provider…</p>
+        <p style={{fontSize:'13px',color:'#9CA3AF',textAlign:'center',maxWidth:'260px',lineHeight:'1.5',margin:'-8px 0 0'}}>
+          Reviewing your answers and preparing personalized treatment options.
+        </p>
+        <div style={{display:'flex',flexDirection:'column',gap:'10px',marginTop:'8px',alignItems:'flex-start'}}>
+          <span style={{fontSize:'13px',color:checkStep>=1?'#22C55E':'#555',transition:'color .3s',display:'flex',alignItems:'center',gap:'8px'}}>
+            {checkStep>=1?'✓':'○'} Reviewing assessment answers
+          </span>
+          <span style={{fontSize:'13px',color:checkStep>=2?'#22C55E':'#555',transition:'color .3s',display:'flex',alignItems:'center',gap:'8px'}}>
+            {checkStep>=2?'✓':'○'} Checking treatment eligibility
+          </span>
+          <span style={{fontSize:'13px',color:checkStep>=3?'#22C55E':'#555',transition:'color .3s',display:'flex',alignItems:'center',gap:'8px'}}>
+            {checkStep>=3?'✓':'○'} Preparing provider recommendations
+          </span>
+        </div>
+        <div className="mrx-transition-secure">
+          <svg className="mrx-transition-lock" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Private &amp; secure connection
+        </div>
+      </div>
+    )}
   );
 }
 
