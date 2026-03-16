@@ -27,8 +27,8 @@ export default function Home() {
         <meta property="og:url" content="https://meniq.co" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://meniq.co/images/meniq-preview.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="1024" />
         <meta property="og:image:alt" content="MenIQ Men's Health Score Test" />
         <meta property="og:locale" content="en_US" />
         <meta name="twitter:card" content="summary_large_image" />
