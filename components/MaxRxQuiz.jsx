@@ -1740,7 +1740,7 @@ export default function MaxRxQuiz() {
       <style>{CSS}</style>
       <div className="mrx-app">
         <div className="mrx-logo">
-          <svg width="300" height="52" viewBox="0 0 440 76" xmlns="http://www.w3.org/2000/svg">
+          <svg width="100%" height="52" viewBox="0 0 440 76" xmlns="http://www.w3.org/2000/svg" style={{maxWidth:'320px',display:'block'}}>
             <polyline points="4,56 20,56 29,38 38,68 47,18 56,56 72,56"
               fill="none" stroke="#c0392b" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round"/>
             <text x="82" y="58" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="54" letterSpacing="-1">
