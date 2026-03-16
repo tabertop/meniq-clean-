@@ -1540,6 +1540,15 @@ function Result({ quiz, result, tracking, onRestart }) {
 
   function handleCTA(e) {
     e.preventDefault();
+    // GA4 event
+    try {
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', 'click_to_maxrx', {
+          event_category: 'quiz',
+          event_label: 'results_cta_click',
+        });
+      }
+    } catch(_) {}
     firePAPAction("click");
     const papAid = getPAPAffiliateId();
     const finalUrl = papAid && !ctaUrl.includes("a_aid=")
