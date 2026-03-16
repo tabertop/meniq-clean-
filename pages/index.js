@@ -81,7 +81,7 @@ export default function Home() {
       </Head>
       <MaxRxQuiz />
       <div style={{
-        position: 'fixed',
+        position: 'absolute',
         bottom: '8px',
         right: '10px',
         fontSize: '10px',
