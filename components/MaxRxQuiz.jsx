@@ -773,7 +773,7 @@ const CSS = `
     width: 100%;
     text-align: center;
   }
-  .mrx-logo svg { display: block; margin: 0; }
+  .mrx-logo svg { display: block; margin: 0 auto; }
 
   /* Screen transition */
   .mrx-screen {
@@ -1367,12 +1367,11 @@ function isValidEmail(e) {
 
 function sendToSheet(payload) {
   try {
-    fetch(WEBHOOK_URL, {
+    fetch("/api/lead", {
       method: "POST",
-      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
-    }).catch(() => {});
+    });
   } catch (_) {}
 }
 
@@ -1414,7 +1413,7 @@ function LeadGate({ quiz, result, tracking, onDone }) {
   return (
     <div className="mrx-screen mrx-leadgate">
       <div className="mrx-lg-top">
-        <div className="mrx-lg-badge">✅ Your results are ready</div>
+        <div className="mrx-lg-badge">✅ Assessment Complete</div>
         <h2 className="mrx-lg-title">Your results are ready</h2>
         <p className="mrx-lg-sub">Would you like a copy of your personalized assessment emailed to you?</p>
       </div>
