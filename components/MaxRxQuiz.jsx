@@ -801,9 +801,9 @@ const CSS = `
     margin-bottom: 8px;
   }
   .mrx-ptrack {
-    height: 3px;
+    height: 5px;
     background: var(--track);
-    border-radius: 2px;
+    border-radius: 3px;
     overflow: hidden;
   }
   .mrx-pfill {
@@ -1312,7 +1312,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack }) {
       <ProgressBar current={qIndex + 1} total={quiz.questions.length} title={quiz.title} />
       <div className="mrx-screen">
         <div className="mrx-qhead">
-          <div className="mrx-qnum">Question {qIndex + 1} of {quiz.questions.length}</div>
+          <div className="mrx-qnum">Step {qIndex + 1} of {quiz.questions.length}</div>
           <div className="mrx-qtext">{q.text}</div>
         </div>
         <div className="mrx-opts">
@@ -1779,7 +1779,7 @@ export default function MaxRxQuiz() {
       <style>{CSS}</style>
       <div className="mrx-app">
         <div className="mrx-logo">
-          <svg width="100%" height="52" viewBox="0 0 440 76" xmlns="http://www.w3.org/2000/svg" style={{maxWidth:'320px',display:'block'}}>
+          <svg width="100%" height="30" viewBox="0 0 440 76" xmlns="http://www.w3.org/2000/svg" style={{maxWidth:'180px',display:'block'}}>
             <polyline points="4,56 20,56 29,38 38,68 47,18 56,56 72,56"
               fill="none" stroke="#c0392b" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round"/>
             <text x="82" y="58" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="54" letterSpacing="-1">
