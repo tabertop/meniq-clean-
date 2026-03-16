@@ -1736,6 +1736,7 @@ export default function MaxRxQuiz() {
   const quiz = quizId ? QUIZZES[quizId] : null;
 
   function startQuiz(id) {
+    try { if (typeof window !== 'undefined' && typeof window.gtag === 'function') { window.gtag('event', 'quiz_started', { event_category: 'quiz', event_label: 'start' }); } } catch(_) {}
     setQuizId(id); setQIndex(0); setAnswers({}); setPhase("question");
   }
   function handleAnswer(qId, value, key) {
@@ -1760,6 +1761,7 @@ export default function MaxRxQuiz() {
     setPhase("welcome"); setQuizId(null); setQIndex(0); setAnswers({}); setResult(null);
   }
   function handleLeadDone() {
+    try { if (typeof window !== 'undefined' && typeof window.gtag === 'function') { window.gtag('event', 'quiz_completed', { event_category: 'quiz', event_label: 'results_page' }); } } catch(_) {}
     setPhase("result");
   }
 
