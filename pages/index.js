@@ -85,7 +85,7 @@ export default function Home() {
         bottom: '8px',
         right: '10px',
         fontSize: '10px',
-        color: 'rgba(255,255,255,0.18)',
+        color: 'rgba(255,255,255,0.08)',
         fontFamily: 'monospace',
         letterSpacing: '0.04em',
         pointerEvents: 'none',
