@@ -1362,8 +1362,9 @@ function isValidEmail(e) {
 
 function sendToSheet(payload) {
   try {
-    fetch("/api/lead", {
+    fetch(WEBHOOK_URL, {
       method: "POST",
+      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
