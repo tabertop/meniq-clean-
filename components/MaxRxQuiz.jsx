@@ -1558,6 +1558,7 @@ function Result({ quiz, result, tracking, onRestart }) {
   }
 
   return (
+    <>
     <div className="mrx-result">
       <div className="mrx-rtag"><span className="mrx-rtag-dot" /> MenIQ Assessment</div>
       <div className="mrx-step-indicator">Your Personalized Results</div>
@@ -1697,10 +1698,11 @@ function Result({ quiz, result, tracking, onRestart }) {
         </div>
         <div className="mrx-transition-secure">
           <svg className="mrx-transition-lock" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Private &amp; secure connection
+          Private & secure connection
         </div>
       </div>
     )}
+    </>
   );
 }
 
