@@ -1561,10 +1561,10 @@ function Result({ quiz, result, tracking, onRestart }) {
       <div style={{
         width: '52px', height: '52px', borderRadius: '50%',
         background: getScoreColor(result.confidence),
-        margin: '0 auto 10px',
+        margin: '0 0 10px',
         boxShadow: `0 0 18px ${getScoreColor(result.confidence)}55`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: '22px'
+        fontSize: '22px', flexShrink: 0
       }}>
         {['💚','💛','🧡','💔','🤝'].includes(result.emoji) ? result.emoji : ''}
       </div>
