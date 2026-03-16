@@ -368,7 +368,7 @@ const QUIZZES = {
         key: "active",
         range: [5, 9],
         headline: "Active Thinning - Time to Intervene",
-        emoji: "🤝",
+        emoji: "🟡",
         explanation:
           "Your hair loss is actively progressing. Without treatment, this will continue. The good news: proven medications can stop loss and - for many - regrow hair.",
         bullets: [
@@ -382,7 +382,7 @@ const QUIZZES = {
         key: "aggressive",
         range: [10, 14],
         headline: "Aggressive Recession Detected",
-        emoji: "🟡",
+        emoji: "🟠",
         explanation:
           "Your profile shows significant, rapid hair loss. This requires a comprehensive approach. Medical treatment is your best path to preserving what you have and potentially regrowing more.",
         bullets: [
@@ -396,7 +396,7 @@ const QUIZZES = {
         key: "opportunity",
         range: [15, 100],
         headline: "Critical Treatment Opportunity",
-        emoji: "🟠",
+        emoji: "🔴",
         explanation:
           "Your responses indicate advanced hair loss progression. A personalized medical plan - potentially including multiple therapies - can make a meaningful difference.",
         bullets: [
@@ -491,7 +491,7 @@ const QUIZZES = {
         key: "optimal",
         range: [0, 5],
         headline: "Your T-Levels Appear Healthy",
-        emoji: "🔴",
+        emoji: "🟢",
         explanation:
           "Your responses suggest your testosterone is likely in a healthy range. That said, levels naturally decline with age - knowing your baseline now gives you a head start.",
         bullets: [
@@ -505,7 +505,7 @@ const QUIZZES = {
         key: "borderline",
         range: [6, 11],
         headline: "Borderline Signs - Worth Investigating",
-        emoji: "🤝",
+        emoji: "🟡",
         explanation:
           "Your profile shows several symptoms associated with declining testosterone. These signals don't confirm low T, but they're worth taking seriously with a proper evaluation.",
         bullets: [
@@ -519,7 +519,7 @@ const QUIZZES = {
         key: "likely_low",
         range: [12, 17],
         headline: "Low Testosterone Is Likely",
-        emoji: "🟢",
+        emoji: "🟠",
         explanation:
           "Your responses align closely with clinically recognized low-T symptoms. Multiple markers - energy, libido, mood, and body composition - are all pointing in the same direction.",
         bullets: [
@@ -533,7 +533,7 @@ const QUIZZES = {
         key: "action_needed",
         range: [18, 100],
         headline: "Strong Indicators of Low Testosterone",
-        emoji: "🟡",
+        emoji: "🔴",
         explanation:
           "Your profile strongly suggests clinically low testosterone. The combination of fatigue, libido loss, mood changes, body composition shifts, and sleep disruption is a clear pattern that needs attention.",
         bullets: [
@@ -1558,7 +1558,16 @@ function Result({ quiz, result, tracking, onRestart }) {
     <div className="mrx-result">
       <div className="mrx-rtag"><span className="mrx-rtag-dot" /> MenIQ Assessment</div>
       <div className="mrx-step-indicator">Your Personalized Results</div>
-      <span className="mrx-remoji">{result.emoji}</span>
+      <div style={{
+        width: '52px', height: '52px', borderRadius: '50%',
+        background: getScoreColor(result.confidence),
+        margin: '0 auto 10px',
+        boxShadow: `0 0 18px ${getScoreColor(result.confidence)}55`,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontSize: '22px'
+      }}>
+        {['💚','💛','🧡','💔','🤝'].includes(result.emoji) ? result.emoji : ''}
+      </div>
       <h2 className="mrx-rtitle">{result.headline}</h2>
       <p className="mrx-rexp">{result.explanation}</p>
       <div className="mrx-conf">
