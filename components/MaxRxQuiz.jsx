@@ -1760,6 +1760,15 @@ export default function MaxRxQuiz() {
   function handleRestart() {
     setPhase("welcome"); setQuizId(null); setQIndex(0); setAnswers({}); setResult(null);
   }
+
+  // Auto-start quiz from URL param — ?quiz=ed drops user into Q1 immediately
+  useEffect(() => {
+    try {
+      const p = new URLSearchParams(window.location.search);
+      const autoQ = p.get('quiz');
+      if (autoQ && QUIZZES[autoQ]) startQuiz(autoQ);
+    } catch(_) {}
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   function handleLeadDone() {
     try { if (typeof window !== 'undefined' && typeof window.gtag === 'function') { window.gtag('event', 'quiz_completed', { event_category: 'quiz', event_label: 'results_page' }); } } catch(_) {}
     setPhase("result");
