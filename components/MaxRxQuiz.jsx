@@ -1530,6 +1530,7 @@ function Result({ quiz, result, tracking, onRestart }) {
   const [filled, setFilled] = useState(false);
   const [showTransition, setShowTransition] = useState(false);
   const [checkStep, setCheckStep] = useState(0);
+  const [copiedTT, setCopiedTT] = useState(false);
   useEffect(() => { setTimeout(() => setFilled(true), 80); }, []);
   const ctaUrl = buildCTAUrl(quiz.ctaBase, tracking);
 
@@ -1627,12 +1628,17 @@ function Result({ quiz, result, tracking, onRestart }) {
         </div>
         {/* Row 1: TikTok, Instagram, X */}
         <div className="mrx-share-row1">
-          <button className="mrx-share-btn mrx-share-tt"
-            onClick={() => { try { navigator.clipboard.writeText(buildShareUrl(tracking, 'tiktok', result) + ' — I scored on the MenIQ Health Test. Can you beat me? 👇'); } catch(_){} fireShareEvent('tiktok', tracking, result); }}>
+          <button type="button" className="mrx-share-btn mrx-share-tt"
+            onClick={() => {
+              try { navigator.clipboard.writeText(buildShareUrl(tracking, 'tiktok', result) + ' — I scored on the MenIQ Health Test. Can you beat me? 👇'); } catch(_){}
+              fireShareEvent('tiktok', tracking, result);
+              setCopiedTT(true);
+              setTimeout(() => setCopiedTT(false), 2500);
+            }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/>
             </svg>
-            TikTok
+            {copiedTT ? '✓ Link Copied!' : 'TikTok'}
           </button>
           <a className="mrx-share-btn mrx-share-ig"
             href={`https://www.instagram.com/`}
