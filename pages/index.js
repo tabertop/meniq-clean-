@@ -68,12 +68,12 @@ export default function Home() {
         })}} />
 
         {/* Google Analytics GA4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNQFDH8R29"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-T0YGHRKCQ6"></script>
         <script dangerouslySetInnerHTML={{ __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-JNQFDH8R29');
+          gtag('config', 'G-T0YGHRKCQ6');
         `}} />
 
         {/* TikTok Pixel */}
