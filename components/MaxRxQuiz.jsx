@@ -773,7 +773,7 @@ const CSS = `
     width: 100%;
     text-align: center;
   }
-  .mrx-logo svg { display: block; margin: 0 auto; }
+  .mrx-logo svg { display: block; margin: 0; }
 
   /* Screen transition */
   .mrx-screen {
