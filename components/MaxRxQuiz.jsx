@@ -1053,7 +1053,7 @@ const CSS = `
     text-transform: uppercase; font-weight: 600; margin-bottom: 4px;
   }
   .mrx-share-sub { font-size: 13px; color: #888; line-height: 1.4; }
-  .mrx-share-row1 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  .mrx-share-row1 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
   .mrx-share-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .mrx-share-btn {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -1066,11 +1066,6 @@ const CSS = `
   }
   .mrx-share-btn svg { flex-shrink: 0; }
   .mrx-share-btn:hover { transform: translateY(-2px); }
-  .mrx-share-tt {
-    color: #fff; border-color: rgba(255,255,255,.12);
-    background: linear-gradient(135deg, #1a1a1a, #111);
-  }
-  .mrx-share-tt:hover { background: #222; border-color: rgba(255,255,255,.3); }
   .mrx-share-ig {
     color: #E1306C; border-color: rgba(225,48,108,.2);
     background: linear-gradient(135deg, #1a1118, #110d18);
