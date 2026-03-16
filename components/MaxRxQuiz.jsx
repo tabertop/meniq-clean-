@@ -1618,8 +1618,7 @@ function Result({ quiz, result, tracking, onRestart }) {
       <button className="mrx-cta2" onClick={onRestart}>Take a different quiz</button>
       <div className="mrx-share-section">
         <div className="mrx-share-header">
-          <p className="mrx-share-label">Share Your Score</p>
-          <p className="mrx-share-sub">Share MenIQ.co with your friends</p>
+          <p className="mrx-share-label">Share MenIQ.co with your friends</p>
         </div>
         {/* Row 1: TikTok, Instagram, X */}
         <div className="mrx-share-row1">
