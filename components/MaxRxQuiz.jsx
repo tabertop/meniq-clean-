@@ -47,7 +47,7 @@ const MHA_BASE_URL = "https://meniq.co";
 // PAP and UTM params we preserve exactly as received
 const INBOUND_PARAMS = [
   "a_aid", "a_bid", "a_cid",          // Post Affiliates Pro
-  "affiliate", "ref",                   // legacy affiliate
+  "affiliate", "ref", "pap_aid", "aid", // legacy affiliate
   "utm_source", "utm_medium",
   "utm_campaign", "utm_content",
   "utm_term", "source",
@@ -91,7 +91,7 @@ function buildShareUrl(tracking, channel, result) {
     const url = new URL(MHA_BASE_URL);
 
     // 1. Preserve original PAP/affiliate params exactly as received
-    ["a_aid", "a_bid", "a_cid", "affiliate", "ref"].forEach(k => {
+    ["a_aid", "a_bid", "a_cid", "affiliate", "ref", "pap_aid", "aid"].forEach(k => {
       if (tracking[k]) url.searchParams.set(k, tracking[k]);
     });
 
