@@ -937,7 +937,7 @@ const CSS = `
     letter-spacing: .08em; text-transform: uppercase; margin-bottom: 18px;
   }
   .mrx-rtag-dot { width: 5px; height: 5px; background: var(--red-bright); border-radius: 50%; display: inline-block; }
-  .mrx-step-indicator { font-size: 12px; color: #6B7280; letter-spacing: .04em; margin: 4px 0 12px; }
+  .mrx-step-indicator { font-size: 12px; color: #6B7280; letter-spacing: .04em; margin: 10px 0 14px; }
   .mrx-friction-line { font-size: 13px; color: var(--muted); text-align: center; line-height: 1.6; margin: 0 0 14px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
   .mrx-avail-row { display: flex; align-items: center; justify-content: center; gap: 8px; }
   .mrx-avail-dot { width: 7px; height: 7px; border-radius: 50%; background: #34C759; flex-shrink: 0; }
@@ -1557,17 +1557,17 @@ function Result({ quiz, result, tracking, onRestart }) {
     <>
     <div className="mrx-result">
       <div className="mrx-rtag"><span className="mrx-rtag-dot" /> MenIQ Assessment</div>
-      <div className="mrx-step-indicator">Your Personalized Results</div>
       <div style={{
         width: '52px', height: '52px', borderRadius: '50%',
         background: getScoreColor(result.confidence),
-        margin: '0 0 10px',
+        margin: '0 0 0',
         boxShadow: `0 0 18px ${getScoreColor(result.confidence)}55`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontSize: '22px', flexShrink: 0
       }}>
         {['💚','💛','🧡','💔','🤝'].includes(result.emoji) ? result.emoji : ''}
       </div>
+      <div className="mrx-step-indicator">Your Personalized Results</div>
       <h2 className="mrx-rtitle">{result.headline}</h2>
       <p className="mrx-rexp">{result.explanation}</p>
       <div className="mrx-conf">
