@@ -1575,7 +1575,7 @@ function Result({ quiz, result, tracking, onRestart }) {
         fontSize: '22px', flexShrink: 0,
         animation: 'mrxBubblePulse 2.8s ease-in-out infinite',
       }}>
-        {['💚','💛','🧡','💔','🤝'].includes(result.emoji) ? result.emoji : ''}
+        {''}
       </div>
       <div className="mrx-step-indicator">Your Personalized Results</div>
       <h2 className="mrx-rtitle">{result.headline}</h2>
