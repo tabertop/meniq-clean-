@@ -91,7 +91,11 @@ export default function Home() {
         pointerEvents: 'none',
         zIndex: 9999,
         userSelect: 'none',
-      }}>v1.0</div>
+      }}>
+        {typeof window !== 'undefined' && window.__NEXT_DATA__?.buildId
+          ? window.__NEXT_DATA__.buildId.slice(0, 7)
+          : 'v1.0'}
+      </div>
     </>
   )
 }
