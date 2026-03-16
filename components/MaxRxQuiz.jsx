@@ -150,7 +150,7 @@ function buildCTAUrl(base, tracking) {
 }
 
 // ?? Google Sheets webhook URL - replace with your Apps Script Web App URL ---
-const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxzCwfPDcLYc6rFlAl504ZPEhbIlrukjzLj37vdajz2wIG6WE07jZ3xS9_H27-IPh4jhA/exec";
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby17BXJ_ZwB0j6akuE7Qdq-jW4fCbRpx-x8b4dEggn9c-BZdOOtyswQfztOz26EsqirDQ/exec";
 
 // ?? Quiz data ---
 const QUIZZES = {
@@ -1367,7 +1367,7 @@ function isValidEmail(e) {
 
 function sendToSheet(payload) {
   try {
-    fetch("/api/lead", {
+    fetch(WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
