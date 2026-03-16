@@ -826,6 +826,14 @@ const CSS = `
     width: 5px; height: 5px; background: var(--red-bright);
     border-radius: 50%; animation: mrxPulse 2s infinite;
   }
+  @keyframes mrxBubblePulse {
+    0%   { transform: scale(1);    box-shadow: 0 0 0 0 var(--bubble-color); }
+    50%  { transform: scale(1.04); box-shadow: 0 0 0 8px transparent; }
+    100% { transform: scale(1);    box-shadow: 0 0 0 0 var(--bubble-color); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mrx-status-bubble { animation: none !important; }
+  }
   @keyframes mrxPulse { 0%,100%{opacity:1} 50%{opacity:.35} }
   .mrx-h1 {
     font-family: 'Bebas Neue', sans-serif;
@@ -1558,13 +1566,15 @@ function Result({ quiz, result, tracking, onRestart }) {
     <>
     <div className="mrx-result">
       <div className="mrx-rtag"><span className="mrx-rtag-dot" /> MenIQ Assessment</div>
-      <div style={{
+      <div className="mrx-status-bubble" style={{
         width: '52px', height: '52px', borderRadius: '50%',
         background: getScoreColor(result.confidence),
         margin: '0 0 0',
         boxShadow: `0 0 18px ${getScoreColor(result.confidence)}55`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: '22px', flexShrink: 0
+        fontSize: '22px', flexShrink: 0,
+        animation: 'mrxBubblePulse 2.8s ease-in-out infinite',
+        '--bubble-color': `${getScoreColor(result.confidence)}44`,
       }}>
         {['💚','💛','🧡','💔','🤝'].includes(result.emoji) ? result.emoji : ''}
       </div>
