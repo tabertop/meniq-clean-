@@ -827,9 +827,9 @@ const CSS = `
     border-radius: 50%; animation: mrxPulse 2s infinite;
   }
   @keyframes mrxBubblePulse {
-    0%   { transform: scale(1);    box-shadow: 0 0 0 0 var(--bubble-color); }
-    50%  { transform: scale(1.04); box-shadow: 0 0 0 8px transparent; }
-    100% { transform: scale(1);    box-shadow: 0 0 0 0 var(--bubble-color); }
+    0%   { transform: scale(1);    filter: brightness(1); }
+    50%  { transform: scale(1.04); filter: brightness(1.2); }
+    100% { transform: scale(1);    filter: brightness(1); }
   }
   @media (prefers-reduced-motion: reduce) {
     .mrx-status-bubble { animation: none !important; }
@@ -1574,7 +1574,6 @@ function Result({ quiz, result, tracking, onRestart }) {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontSize: '22px', flexShrink: 0,
         animation: 'mrxBubblePulse 2.8s ease-in-out infinite',
-        '--bubble-color': `${getScoreColor(result.confidence)}44`,
       }}>
         {['💚','💛','🧡','💔','🤝'].includes(result.emoji) ? result.emoji : ''}
       </div>
