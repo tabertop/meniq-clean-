@@ -1217,16 +1217,16 @@ const CSS = `
 `;
 
 // ?? Sub-components ---
-function ProgressBar({ current, total, title }) {
+function ProgressBar({ current, total, title, isTikTok }) {
   const pct = total > 0 ? Math.round((current / total) * 100) : 0;
   return (
     <div className="mrx-progress">
       <div className="mrx-pmeta">
         <span>{title}</span>
-        <span>{current} / {total}</span>
+        <span>{isTikTok ? `Question ${current} of ${total}` : `${current} / ${total}`}</span>
       </div>
-      <div className="mrx-ptrack">
-        <div className="mrx-pfill" style={{ width: `${pct}%` }} />
+      <div className="mrx-ptrack" style={isTikTok ? {height:'7px'} : {}}>
+        <div className="mrx-pfill" style={{ width: `${pct}%`, ...(isTikTok ? {background:'linear-gradient(90deg,#c0392b,#ff4d3a)'} : {}) }} />
       </div>
     </div>
   );
@@ -1295,13 +1295,15 @@ function Welcome({ onSelect }) {
   );
 }
 
-function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack }) {
+function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok }) {
   const q = quiz.questions[qIndex];
   if (!q) return null;
   const pickKey = answers._lastPick || "";
 
   function handlePick(qId, value, key) {
     onAnswer(qId, value, key);
+    // TikTok auto-advance: highlight 200ms then next
+    if (isTikTok) { setTimeout(() => onNext({ ...answers, [qId]: value }), 200); return; }
     // Pass updated answers directly to avoid stale closure on last question
     const updatedAnswers = { ...answers, [qId]: value, _lastPick: key };
     setTimeout(() => onNext(updatedAnswers), 320);
@@ -1309,10 +1311,20 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack }) {
 
   return (
     <>
-      <ProgressBar current={qIndex + 1} total={quiz.questions.length} title={quiz.title} />
+      {isTikTok && (
+        <div style={{textAlign:'center',padding:'8px 24px 0',lineHeight:1.5}}>
+          <div style={{fontSize:'13px',color:'#9CA3AF',letterSpacing:'.01em'}}>
+            ⚡ Most men are surprised by their Bedroom Confidence Score
+          </div>
+          <div style={{fontSize:'11px',color:'#6B7280',marginTop:'4px'}}>
+            Private • Anonymous • Takes 20 seconds
+          </div>
+        </div>
+      )}
+      <ProgressBar current={qIndex + 1} total={quiz.questions.length} title={quiz.title} isTikTok={isTikTok} />
       <div className="mrx-screen">
         <div className="mrx-qhead">
-          <div className="mrx-qnum">Step {qIndex + 1} of {quiz.questions.length}</div>
+          <div className="mrx-qnum">{isTikTok ? `Question ${qIndex + 1} of ${quiz.questions.length}` : `Step ${qIndex + 1} of ${quiz.questions.length}`}</div>
           <div className="mrx-qtext">{q.text}</div>
         </div>
         <div className="mrx-opts">
@@ -1321,7 +1333,8 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack }) {
             return (
               <button
                 key={i}
-                className={`mrx-opt${pickKey === key ? " sel" : ""}`}
+                className={`mrx-opt${pickKey === key ? " sel" : ""}${isTikTok && pickKey === key ? " tt-picked" : ""}`}
+                style={isTikTok && pickKey === key ? {transform:'scale(1.02)',transition:'transform .15s ease',borderColor:'var(--red-bright)'} : {}}
                 onClick={() => handlePick(q.id, opt.value, key)}
               >
                 <span className="mrx-circle"><span className="mrx-dot" /></span>
@@ -1792,6 +1805,7 @@ export default function MaxRxQuiz() {
           <Question
             quiz={quiz} qIndex={qIndex} answers={answers}
             onAnswer={handleAnswer} onNext={handleNext} onBack={handleBack}
+            isTikTok={typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('utm_source') === 'tiktok'}
           />
         )}
         {phase === "loading" && <Loading />}
