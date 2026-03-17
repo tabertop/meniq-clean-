@@ -1317,7 +1317,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
 
   function handlePick(qId, value, key) {
     onAnswer(qId, value, key);
-    if (isTikTok) { setTimeout(() => onNext({ ...answers, [qId]: value }), 200); return; }
+    // Auto-advance disabled — using Continue button for better UX
     // Pass updated answers directly to avoid stale closure on last question
     const updatedAnswers = { ...answers, [qId]: value, _lastPick: key };
     setTimeout(() => onNext(updatedAnswers), 320);
@@ -1364,10 +1364,10 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
         <div className="mrx-qhead">
           <div className="mrx-qnum">{isTikTok ? (() => {
             const s = qIndex + 1, t = quiz.questions.length;
-            if (s === t) return 'Final step — See your score';
-            if (s === t - 1) return `Step ${s} of ${t} — Almost there`;
-            if (s === t - 2) return `Step ${s} of ${t} — Almost done`;
-            return `Step ${s} of ${t}`;
+            if (s === t)     return `Question ${s} of ${t} — Final question`;
+            if (s === t - 1) return `Question ${s} of ${t} — Almost there`;
+            if (s === t - 2) return `Question ${s} of ${t} — Almost done`;
+            return `Question ${s} of ${t}`;
           })() : `Step ${qIndex + 1} of ${quiz.questions.length}`}</div>
           <div className="mrx-qtext">{q.text}</div>
         </div>
@@ -1389,11 +1389,25 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
         </div>
         {isTikTok && (() => {
           const s = qIndex + 1, t = quiz.questions.length;
-          const cue = s === t ? 'Final step' : s === t-1 ? 'One more step after this' : s === t-2 ? "Quick check — you're almost done" : null;
+          const cue = s === t ? 'Final question' : s === t-1 ? 'Just one more after this' : s === t-2 ? "Quick check — you're almost done" : null;
           return cue ? (
             <div style={{fontSize:'12px',color:'#6B7280',textAlign:'center',margin:'8px 0 0',letterSpacing:'.01em'}}>{cue}</div>
           ) : null;
         })()}
+        {isTikTok && pickKey !== null && (
+          <button
+            style={{
+              width:'100%', padding:'15px', marginTop:'14px',
+              background:'var(--red)', border:'none', borderRadius:'14px',
+              color:'white', fontSize:'16px', fontWeight:'600',
+              fontFamily:"'DM Sans', sans-serif", cursor:'pointer',
+              letterSpacing:'.02em',
+            }}
+            onClick={() => onNext({ ...answers, [q.id]: answers[q.id] })}
+          >
+            {qIndex + 1 === quiz.questions.length ? 'See My Score →' : 'Continue →'}
+          </button>
+        )}
         {qIndex > 0 && (
           <div className="mrx-nav">
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
