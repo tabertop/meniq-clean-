@@ -118,6 +118,10 @@ function buildShareUrl(tracking, channel, result) {
 // Analytics: track share button taps
 function fireShareEvent(channel, tracking, result) {
   try {
+    // Rate-limit: allow only ONE share event per channel per session
+    const ssKey = 'miq_shared_' + channel;
+    if (sessionStorage.getItem(ssKey)) return;
+    sessionStorage.setItem(ssKey, '1');
     // Fire PAP action if affiliate is present
     if (tracking.a_aid || tracking.affiliate) {
       firePAPAction("share");
