@@ -1558,7 +1558,8 @@ function Result({ quiz, result, tracking, onRestart }) {
       const rect = cta.getBoundingClientRect();
       const vh = window.innerHeight;
       if (rect.bottom > vh - 24) {
-        window.scrollTo({ top: window.scrollY + (rect.bottom - vh + 24), behavior: 'instant' });
+        // body is the scroll container (html has overflow:hidden)
+        document.body.scrollTop += (rect.bottom - vh + 24);
       }
     }, 200);
     return () => clearTimeout(t);
