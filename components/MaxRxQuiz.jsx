@@ -667,6 +667,12 @@ const QUIZZES = {
     ],
   },
 };
+// TikTok variant — ED quiz without question #3 (progression)
+QUIZZES.ed_tiktok = {
+  ...QUIZZES.ed,
+  questions: QUIZZES.ed.questions.filter(q => q.id !== 'progression'),
+};
+
 
 // ?? Scoring ---
 // ?? Peer comparison data ---
@@ -1818,7 +1824,9 @@ export default function MaxRxQuiz() {
   useEffect(() => {
     try {
       const p = new URLSearchParams(window.location.search);
-      const autoQ = p.get('quiz');
+      let autoQ = p.get('quiz');
+      // Use TikTok-specific quiz variant (5 questions, no progression Q)
+      if (autoQ === 'ed' && p.get('utm_source') === 'tiktok') autoQ = 'ed_tiktok';
       if (autoQ && QUIZZES[autoQ]) startQuiz(autoQ);
     } catch(_) {}
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
