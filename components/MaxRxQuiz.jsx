@@ -1569,9 +1569,20 @@ function getMenIQCategory(quizId, score) {
 }
 
 function Result({ quiz, result, tracking, onRestart }) {
-  // Scroll to top on result mount so CTA button is reachable
+  // Scroll CTA into view on result mount — ensures button is visible on all screen sizes
+  const ctaRef = useRef(null);
   useEffect(() => {
-    try { window.scrollTo({ top: 0, behavior: 'instant' }); } catch(_) {}
+    try {
+      const el = ctaRef.current;
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        // Fallback: scroll to bottom of page where CTA lives
+        setTimeout(() => {
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }, 300);
+      }
+    } catch(_) {}
   }, []);
   const [filled, setFilled] = useState(false);
   const [showTransition, setShowTransition] = useState(false);
@@ -1672,7 +1683,7 @@ function Result({ quiz, result, tracking, onRestart }) {
           </p>
           <p className="mrx-cta-support-line">Most visits take only a few minutes.</p>
         </div>
-        <a className="mrx-cta" href={ctaUrl} onClick={handleCTA} rel="noopener noreferrer">
+        <a ref={ctaRef} className="mrx-cta" href={ctaUrl} onClick={handleCTA} rel="noopener noreferrer">
           {quiz.ctaLabel} →
         </a>
         <div className="mrx-trust-strip">
