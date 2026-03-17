@@ -118,10 +118,6 @@ function buildShareUrl(tracking, channel, result) {
 // Analytics: track share button taps
 function fireShareEvent(channel, tracking, result) {
   try {
-    // Rate-limit: allow only ONE share event per channel per session
-    const ssKey = 'miq_shared_' + channel;
-    if (sessionStorage.getItem(ssKey)) return;
-    sessionStorage.setItem(ssKey, '1');
     // Fire PAP action if affiliate is present
     if (tracking.a_aid || tracking.affiliate) {
       firePAPAction("share");
@@ -1221,16 +1217,16 @@ const CSS = `
 `;
 
 // ?? Sub-components ---
-function ProgressBar({ current, total, title, isTikTok }) {
+function ProgressBar({ current, total, title }) {
   const pct = total > 0 ? Math.round((current / total) * 100) : 0;
   return (
     <div className="mrx-progress">
       <div className="mrx-pmeta">
         <span>{title}</span>
-        <span>{isTikTok ? `Question ${current} of ${total}` : `${current} / ${total}`}</span>
+        <span>{current} / {total}</span>
       </div>
-      <div className="mrx-ptrack" style={isTikTok ? {height:'7px'} : {}}>
-        <div className="mrx-pfill" style={{ width: `${pct}%`, ...(isTikTok ? {background:'linear-gradient(90deg,#c0392b,#ff4d3a)'} : {}) }} />
+      <div className="mrx-ptrack">
+        <div className="mrx-pfill" style={{ width: `${pct}%` }} />
       </div>
     </div>
   );
@@ -1299,15 +1295,13 @@ function Welcome({ onSelect }) {
   );
 }
 
-function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok }) {
+function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack }) {
   const q = quiz.questions[qIndex];
   if (!q) return null;
   const pickKey = answers._lastPick || "";
 
   function handlePick(qId, value, key) {
     onAnswer(qId, value, key);
-    // TikTok auto-advance: highlight 200ms then next
-    if (isTikTok) { setTimeout(() => onNext({ ...answers, [qId]: value }), 200); return; }
     // Pass updated answers directly to avoid stale closure on last question
     const updatedAnswers = { ...answers, [qId]: value, _lastPick: key };
     setTimeout(() => onNext(updatedAnswers), 320);
@@ -1315,20 +1309,10 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
 
   return (
     <>
-      {isTikTok && (
-        <div style={{textAlign:'center',padding:'8px 24px 0',lineHeight:1.5}}>
-          <div style={{fontSize:'13px',color:'#9CA3AF',letterSpacing:'.01em'}}>
-            ⚡ Most men are surprised by their score
-          </div>
-          <div style={{fontSize:'11px',color:'#6B7280',marginTop:'4px'}}>
-            Private • Anonymous • Takes 30 seconds
-          </div>
-        </div>
-      )}
-      <ProgressBar current={qIndex + 1} total={quiz.questions.length} title={quiz.title} isTikTok={isTikTok} />
+      <ProgressBar current={qIndex + 1} total={quiz.questions.length} title={quiz.title} />
       <div className="mrx-screen">
         <div className="mrx-qhead">
-          {!isTikTok && <div className="mrx-qnum">Step {qIndex + 1} of {quiz.questions.length}</div>}
+          <div className="mrx-qnum">Step {qIndex + 1} of {quiz.questions.length}</div>
           <div className="mrx-qtext">{q.text}</div>
         </div>
         <div className="mrx-opts">
@@ -1337,8 +1321,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             return (
               <button
                 key={i}
-                className={`mrx-opt${pickKey === key ? " sel" : ""}${isTikTok && pickKey === key ? " tt-picked" : ""}`}
-                style={isTikTok && pickKey === key ? {transform:'scale(1.02)',transition:'transform .15s ease',borderColor:'var(--red-bright)'} : {}}
+                className={`mrx-opt${pickKey === key ? " sel" : ""}`}
                 onClick={() => handlePick(q.id, opt.value, key)}
               >
                 <span className="mrx-circle"><span className="mrx-dot" /></span>
@@ -1554,21 +1537,6 @@ function Result({ quiz, result, tracking, onRestart }) {
   const [copiedTT, setCopiedTT] = useState(false);
   useEffect(() => { setTimeout(() => setFilled(true), 80); }, []);
   const ctaUrl = buildCTAUrl(quiz.ctaBase, tracking);
-  // Scroll CTA into view when results screen mounts
-  useEffect(() => {
-    const t = setTimeout(() => {
-      const cta = document.querySelector('a.mrx-cta, button.mrx-cta');
-      if (!cta) return;
-      const rect = cta.getBoundingClientRect();
-      const vh = window.innerHeight;
-      if (rect.bottom > vh - 24) {
-        // body is the scroll container (html has overflow:hidden)
-        document.body.scrollTop += (rect.bottom - vh + 24);
-      }
-    }, 200);
-    return () => clearTimeout(t);
-  }, []); // runs once when Result mounts
-
 
   function handleCTA(e) {
     e.preventDefault();
@@ -1683,36 +1651,43 @@ function Result({ quiz, result, tracking, onRestart }) {
         {/* Row 1: TikTok, Instagram, X */}
         <div className="mrx-share-row1">
           <a className="mrx-share-btn mrx-share-ig"
-            href="#"
-            onClick={e => { e.preventDefault(); try { navigator.clipboard.writeText(buildShareUrl(tracking, 'instagram', result) + ' — I scored on the MenIQ Health Test. Try to beat me.'); } catch(_){} fireShareEvent('instagram', tracking, result); }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            href={`https://www.instagram.com/`}
+            target="_blank" rel="noopener noreferrer"
+            onClick={() => { try { navigator.clipboard.writeText(buildShareUrl(tracking, 'instagram', result) + ' — I just took the MenIQ Health Test. Try to beat my score.'); } catch(e){ fireShareEvent('instagram', tracking, result); } }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+            </svg>
             Instagram
           </a>
           <a className="mrx-share-btn mrx-share-x"
-            href="#"
-            onClick={e => { e.preventDefault(); const url = 'https://x.com/intent/tweet?text=' + encodeURIComponent('I just took the MenIQ Health Test 🔴 See how you score vs other men your age 👇') + '&url=' + encodeURIComponent(buildShareUrl(tracking, 'x', result)); fireShareEvent('x', tracking, result); window.open(url, '_blank', 'noopener,noreferrer'); }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            href={`https://x.com/intent/tweet?text=${encodeURIComponent('I just took the MenIQ Health Test 🔴 See how you score vs other men your age 👇')}&url=${encodeURIComponent(buildShareUrl(tracking, 'x', result))}`}
+            target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
             X
           </a>
         </div>
         {/* Row 2: Telegram, WhatsApp */}
         <div className="mrx-share-row2">
           <a className="mrx-share-btn mrx-share-tg"
-            href="#"
-            onClick={e => { e.preventDefault(); const url = 'https://t.me/share/url?url=' + encodeURIComponent(buildShareUrl(tracking, 'telegram', result)) + '&text=' + encodeURIComponent('I just took the MenIQ Health Test. Find out where you rank vs other men your age 👇'); fireShareEvent('telegram', tracking, result); window.open(url, '_blank', 'noopener,noreferrer'); }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.947l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.978.612z"/></svg>
+            href={`https://t.me/share/url?url=${encodeURIComponent(buildShareUrl(tracking, 'telegram', result))}&text=${encodeURIComponent('I just took the MenIQ Health Test. Find out where you rank vs other men your age 👇')}`}
+            target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.947l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.978.612z"/>
+            </svg>
             Telegram
           </a>
           <a className="mrx-share-btn mrx-share-wa"
-            href="#"
-            onClick={e => { e.preventDefault(); const url = 'https://wa.me/?text=' + encodeURIComponent('I just took the MenIQ Health Test. Find out where you rank vs other men your age 👇 ' + buildShareUrl(tracking, 'whatsapp', result)); fireShareEvent('whatsapp', tracking, result); window.open(url, '_blank', 'noopener,noreferrer'); }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.527 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            href={`https://wa.me/?text=${encodeURIComponent('I just took the MenIQ Health Test. Find out where you rank vs other men your age 👇 ' + buildShareUrl(tracking, 'whatsapp', result))}`}
+            target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
             WhatsApp
           </a>
         </div>
       </div>
-    </div>
-  </div>
       <p className="mrx-disc">
         This assessment is for informational purposes only. All treatments require consultation with a licensed provider.
         {tracking.affiliate ? ` - Ref: ${tracking.affiliate}` : ""}
@@ -1749,10 +1724,6 @@ function Result({ quiz, result, tracking, onRestart }) {
 // ?? Main App ---
 export default function MaxRxQuiz() {
   const [phase, setPhase] = useState("welcome");
-  const [isTikTok, setIsTikTok] = useState(false);
-  useEffect(() => {
-    setIsTikTok(new URLSearchParams(window.location.search).get('utm_source') === 'tiktok');
-  }, []);
   const [quizId, setQuizId] = useState(null);
   const [qIndex, setQIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -1821,7 +1792,6 @@ export default function MaxRxQuiz() {
           <Question
             quiz={quiz} qIndex={qIndex} answers={answers}
             onAnswer={handleAnswer} onNext={handleNext} onBack={handleBack}
-            isTikTok={isTikTok}
           />
         )}
         {phase === "loading" && <Loading />}
