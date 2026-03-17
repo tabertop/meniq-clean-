@@ -1309,11 +1309,34 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
   return (
     <>
       {isTikTok && (
-        <div style={{padding:'12px 24px 0',textAlign:'center'}}>
-          <div style={{fontSize:'13px',color:'#9CA3AF',letterSpacing:'.01em',marginBottom:'4px'}}>
-            ⚡ Most men are surprised by their score
+        <div style={{
+          width:'100%',
+          padding:'14px 0 2px',
+          display:'flex',
+          flexDirection:'column',
+          alignItems:'center',
+          textAlign:'center',
+        }}>
+          <div style={{
+            fontSize:'13px',
+            color:'#9CA3AF',
+            letterSpacing:'.01em',
+            marginBottom:'5px',
+            display:'flex',
+            alignItems:'center',
+            justifyContent:'center',
+            gap:'4px',
+            lineHeight:1.4,
+          }}>
+            <span>⚡</span>
+            <span>Most men are surprised by their score</span>
           </div>
-          <div style={{fontSize:'11px',color:'#6B7280',marginBottom:'8px'}}>
+          <div style={{
+            fontSize:'11px',
+            color:'#6B7280',
+            letterSpacing:'.02em',
+            lineHeight:1.4,
+          }}>
             Private • Anonymous • Takes 20 seconds
           </div>
         </div>
