@@ -1550,6 +1550,20 @@ function Result({ quiz, result, tracking, onRestart }) {
   const [copiedTT, setCopiedTT] = useState(false);
   useEffect(() => { setTimeout(() => setFilled(true), 80); }, []);
   const ctaUrl = buildCTAUrl(quiz.ctaBase, tracking);
+  // Scroll CTA into view when results screen mounts
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const cta = document.querySelector('a.mrx-cta, button.mrx-cta');
+      if (!cta) return;
+      const rect = cta.getBoundingClientRect();
+      const vh = window.innerHeight;
+      if (rect.bottom > vh - 24) {
+        window.scrollTo({ top: window.scrollY + (rect.bottom - vh + 24), behavior: 'instant' });
+      }
+    }, 200);
+    return () => clearTimeout(t);
+  }, []); // runs once when Result mounts
+
 
   function handleCTA(e) {
     e.preventDefault();
