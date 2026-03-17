@@ -1746,6 +1746,10 @@ function Result({ quiz, result, tracking, onRestart }) {
 // ?? Main App ---
 export default function MaxRxQuiz() {
   const [phase, setPhase] = useState("welcome");
+  const [isTikTok, setIsTikTok] = useState(false);
+  useEffect(() => {
+    setIsTikTok(new URLSearchParams(window.location.search).get('utm_source') === 'tiktok');
+  }, []);
   const [quizId, setQuizId] = useState(null);
   const [qIndex, setQIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -1814,7 +1818,7 @@ export default function MaxRxQuiz() {
           <Question
             quiz={quiz} qIndex={qIndex} answers={answers}
             onAnswer={handleAnswer} onNext={handleNext} onBack={handleBack}
-            isTikTok={typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('utm_source') === 'tiktok'}
+            isTikTok={isTikTok}
           />
         )}
         {phase === "loading" && <Loading />}
