@@ -1376,7 +1376,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
         </div>
         {qIndex > 0 && (
           <div className="mrx-nav">
-            <button className="mrx-back" onClick={onBack}>? Back</button>
+            <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
           </div>
         )}
       </div>
