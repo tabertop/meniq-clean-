@@ -1572,7 +1572,7 @@ function Result({ quiz, result, tracking, onRestart }) {
     const t = setTimeout(() => {
       try {
         const cta = document.querySelector('.mrx-cta');
-        if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'end' });
       } catch(_) {}
     }, 400);
     return () => clearTimeout(t);
