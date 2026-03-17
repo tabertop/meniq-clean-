@@ -1362,7 +1362,13 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
       <ProgressBar current={qIndex + 1} total={quiz.questions.length} title={quiz.title} isTikTok={isTikTok} />
       <div className="mrx-screen">
         <div className="mrx-qhead">
-          <div className="mrx-qnum">{isTikTok ? `Question ${qIndex + 1} of ${quiz.questions.length}` : `Step ${qIndex + 1} of ${quiz.questions.length}`}</div>
+          <div className="mrx-qnum">{isTikTok ? (() => {
+            const s = qIndex + 1, t = quiz.questions.length;
+            if (s === t) return 'Final step — See your score';
+            if (s === t - 1) return `Step ${s} of ${t} — Almost there`;
+            if (s === t - 2) return `Step ${s} of ${t} — Almost done`;
+            return `Step ${s} of ${t}`;
+          })() : `Step ${qIndex + 1} of ${quiz.questions.length}`}</div>
           <div className="mrx-qtext">{q.text}</div>
         </div>
         <div className="mrx-opts">
@@ -1381,6 +1387,13 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             );
           })}
         </div>
+        {isTikTok && (() => {
+          const s = qIndex + 1, t = quiz.questions.length;
+          const cue = s === t ? 'Final step' : s === t-1 ? 'One more step after this' : s === t-2 ? "Quick check — you're almost done" : null;
+          return cue ? (
+            <div style={{fontSize:'12px',color:'#6B7280',textAlign:'center',margin:'8px 0 0',letterSpacing:'.01em'}}>{cue}</div>
+          ) : null;
+        })()}
         {qIndex > 0 && (
           <div className="mrx-nav">
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
