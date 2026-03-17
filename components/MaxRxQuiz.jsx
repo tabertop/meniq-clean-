@@ -755,13 +755,19 @@ const CSS = `
   }
 
   .mrx-app {
-    max-width: 420px;
     width: 100%;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+  }
+  @media (min-width: 421px) {
+    .mrx-app {
+      max-width: 420px;
+      margin: 0 auto;
+    }
   }
   /* Prevent horizontal overflow on mobile */
   html, body { max-width: 100%; overflow-x: hidden; }
