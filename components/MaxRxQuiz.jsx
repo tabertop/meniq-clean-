@@ -1314,7 +1314,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
       {isTikTok && (
         <div style={{textAlign:'center',padding:'8px 24px 0',lineHeight:1.5}}>
           <div style={{fontSize:'13px',color:'#9CA3AF',letterSpacing:'.01em'}}>
-            ⚡ Most men are surprised by their Bedroom Confidence Score
+            ⚡ Most men are surprised by their score
           </div>
           <div style={{fontSize:'11px',color:'#6B7280',marginTop:'4px'}}>
             Private • Anonymous • Takes 20 seconds
@@ -1324,7 +1324,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
       <ProgressBar current={qIndex + 1} total={quiz.questions.length} title={quiz.title} isTikTok={isTikTok} />
       <div className="mrx-screen">
         <div className="mrx-qhead">
-          <div className="mrx-qnum">{isTikTok ? `Question ${qIndex + 1} of ${quiz.questions.length}` : `Step ${qIndex + 1} of ${quiz.questions.length}`}</div>
+          {!isTikTok && <div className="mrx-qnum">Step {qIndex + 1} of {quiz.questions.length}</div>}
           <div className="mrx-qtext">{q.text}</div>
         </div>
         <div className="mrx-opts">
