@@ -106,8 +106,6 @@ function buildShareUrl(tracking, channel, result) {
       url.searchParams.set("utm_campaign", tracking.utm_campaign);
     }
 
-    // 4. Fire analytics event
-    fireShareEvent(channel, tracking, result);
 
     return url.toString();
   } catch(_) {
