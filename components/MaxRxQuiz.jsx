@@ -1710,6 +1710,9 @@ function Result({ quiz, result, tracking, onRestart }) {
             WhatsApp
           </a>
         </div>
+      </div>
+    </div>
+  </div>
       <p className="mrx-disc">
         This assessment is for informational purposes only. All treatments require consultation with a licensed provider.
         {tracking.affiliate ? ` - Ref: ${tracking.affiliate}` : ""}
