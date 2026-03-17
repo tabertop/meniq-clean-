@@ -1317,7 +1317,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             ⚡ Most men are surprised by their score
           </div>
           <div style={{fontSize:'11px',color:'#6B7280',marginTop:'4px'}}>
-            Private • Anonymous • Takes 20 seconds
+            Private • Anonymous • Takes 30 seconds
           </div>
         </div>
       )}
