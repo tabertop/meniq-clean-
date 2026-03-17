@@ -763,8 +763,9 @@ const CSS = `
     flex-direction: column;
     box-sizing: border-box;
   }
-  /* Prevent horizontal overflow on mobile */
-  html, body { max-width: 100%; overflow-x: hidden; }
+  /* Prevent horizontal overflow on mobile — body overflow-x:hidden breaks position:fixed on iOS */
+  html { overflow-x: hidden; }
+  body { max-width: 100%; }
 
   .mrx-logo {
     padding: 16px 0 0;
@@ -1568,6 +1569,10 @@ function getMenIQCategory(quizId, score) {
 }
 
 function Result({ quiz, result, tracking, onRestart }) {
+  // Scroll to top on result mount so CTA button is reachable
+  useEffect(() => {
+    try { window.scrollTo({ top: 0, behavior: 'instant' }); } catch(_) {}
+  }, []);
   const [filled, setFilled] = useState(false);
   const [showTransition, setShowTransition] = useState(false);
   const [checkStep, setCheckStep] = useState(0);
