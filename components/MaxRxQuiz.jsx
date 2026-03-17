@@ -1346,7 +1346,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             color:'#6B7280',
             letterSpacing:'.02em',
             lineHeight:1.4,
-            marginLeft:'8px',
+            marginLeft:'20px',
           }}>
             Private • Anonymous • Takes 30 seconds
           </div>
