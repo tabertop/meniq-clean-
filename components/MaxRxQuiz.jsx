@@ -1887,6 +1887,20 @@ export default function MaxRxQuiz() {
             </text>
           </svg>
         </div>
+        {(phase === 'welcome' || phase === "welcome") && (
+          <div style={{
+            width:'100%',
+            textAlign:'center',
+            fontSize:'12px',
+            fontWeight:'400',
+            color:'#6B7280',
+            marginTop:'6px',
+            letterSpacing:'.01em',
+            fontFamily:"'DM Sans',sans-serif",
+          }}>
+            Powered by <span style={{color:'#C0392B',fontWeight:'500'}}>MaxRx</span>
+          </div>
+        )}
         {phase === "welcome" && <Welcome onSelect={startQuiz} />}
         {phase === "question" && quiz && (
           <Question
