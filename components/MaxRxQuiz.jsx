@@ -1878,14 +1878,7 @@ export default function MaxRxQuiz() {
     <div className="mrx-root">
       <style>{CSS}</style>
       <div className="mrx-app">
-        <div className="mrx-logo" style={{position:'relative'}}>
-          {typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('utm_source') === 'tiktok' && (
-            <div style={{
-              position:'absolute', right:'24px', top:'50%', transform:'translateY(-50%)',
-              fontSize:'11px', fontWeight:'700', color:'#C0392B',
-              opacity:0.65, letterSpacing:'.04em', fontFamily:"'DM Sans',sans-serif",
-            }}>MaxRx</div>
-          )}
+        <div className="mrx-logo">
           <svg width="100%" height="30" viewBox="0 0 440 76" xmlns="http://www.w3.org/2000/svg" style={{width:'100%',maxWidth:'180px',display:'block',margin:'0 auto'}}>
             <polyline points="4,56 20,56 29,38 38,68 47,18 56,56 72,56"
               fill="none" stroke="#c0392b" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round"/>
