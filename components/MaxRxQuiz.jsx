@@ -1388,13 +1388,6 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             );
           })}
         </div>
-        {isTikTok && (() => {
-          const s = qIndex + 1, t = quiz.questions.length;
-          return cue ? (
-            <div style={{fontSize:'12px',color:'#6B7280',textAlign:'center',margin:'8px 0 0',letterSpacing:'.01em'}}>{cue}</div>
-          ) : null;
-        })()}
-
         {qIndex > 0 && (
           <div className="mrx-nav">
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
