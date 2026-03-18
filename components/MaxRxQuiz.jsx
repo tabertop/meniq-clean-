@@ -5,6 +5,10 @@ import { useState, useEffect } from "react";
 const PAP_ACCOUNT_ID = "default1";
 const PAP_SCRIPT_URL = "https://pap.gomaxrx.com/scripts/3gn939v8j";
 
+function fireTTQ(event, params) {
+  try { if (typeof window !== 'undefined' && window.ttq) window.ttq.track(event, params || {}); } catch(_) {}
+}
+
 function loadPAPScript() {
   if (typeof window === "undefined") return;
   if (document.getElementById("pap_x2s6df8d")) return;
@@ -1623,6 +1627,7 @@ function Result({ quiz, result, tracking, onRestart }) {
         });
       }
     } catch(_) {}
+    fireTTQ('InitiateCheckout', { contents: [{ content_id: 'maxrx_cta', content_type: 'product', content_name: 'Start Free Visit' }] });
     firePAPAction("click");
     const papAid = getPAPAffiliateId();
     const finalUrl = papAid && !ctaUrl.includes("a_aid=")
@@ -1812,6 +1817,7 @@ export default function MaxRxQuiz() {
   function startQuiz(id) {
     try { if (typeof window !== 'undefined' && typeof window.gtag === 'function') { window.gtag('event', 'quiz_started', { event_category: 'quiz', event_label: 'start' }); } } catch(_) {}
     setQuizId(id); setQIndex(0); setAnswers({}); setPhase("question");
+    fireTTQ('ViewContent', { contents: [{ content_id: id, content_type: 'product', content_name: 'MenIQ Quiz' }] });
   }
   function handleAnswer(qId, value, key) {
     setAnswers(prev => ({ ...prev, [qId]: value, _lastPick: key }));
@@ -1847,6 +1853,7 @@ export default function MaxRxQuiz() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   function handleLeadDone() {
     try { if (typeof window !== 'undefined' && typeof window.gtag === 'function') { window.gtag('event', 'quiz_completed', { event_category: 'quiz', event_label: 'results_page' }); } } catch(_) {}
+    fireTTQ('CompleteRegistration', { contents: [{ content_id: 'quiz_complete', content_type: 'product', content_name: 'MenIQ Quiz' }] });
     setPhase("result");
   }
 
