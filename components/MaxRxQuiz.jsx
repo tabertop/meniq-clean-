@@ -1865,28 +1865,26 @@ export default function MaxRxQuiz() {
     <div className="mrx-root">
       <style>{CSS}</style>
       <div className="mrx-app">
-        <div style={{position:'sticky',top:0,zIndex:10,background:'var(--bg)',paddingBottom:'4px'}}>
-          <div className="mrx-logo">
-            <svg width="100%" height="30" viewBox="0 0 440 76" xmlns="http://www.w3.org/2000/svg" style={{width:'100%',maxWidth:'180px',display:'block',margin:'0 auto'}}>
-              <polyline points="4,56 20,56 29,38 38,68 47,18 56,56 72,56"
-                fill="none" stroke="#c0392b" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <text x="82" y="58" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="54" letterSpacing="-1">
-                <tspan fill="#ffffff">MEN</tspan><tspan fill="#c0392b">IQ</tspan><tspan fill="#666666">.CO</tspan>
-              </text>
-            </svg>
-          </div>
-          <div style={{
-            width:'100%',
-            textAlign:'center',
-            fontSize:'12px',
-            fontWeight:'400',
-            color:'#6B7280',
-            marginTop:'4px',
-            letterSpacing:'.01em',
-            fontFamily:"'DM Sans',sans-serif",
-          }}>
-            Powered by <span style={{color:'#C0392B',fontWeight:'500'}}>MaxRx</span>
-          </div>
+        <div className="mrx-logo">
+          <svg width="100%" height="30" viewBox="0 0 440 76" xmlns="http://www.w3.org/2000/svg" style={{width:'100%',maxWidth:'180px',display:'block',margin:'0 auto'}}>
+            <polyline points="4,56 20,56 29,38 38,68 47,18 56,56 72,56"
+              fill="none" stroke="#c0392b" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <text x="82" y="58" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="54" letterSpacing="-1">
+              <tspan fill="#ffffff">MEN</tspan><tspan fill="#c0392b">IQ</tspan><tspan fill="#666666">.CO</tspan>
+            </text>
+          </svg>
+        </div>
+        <div style={{
+          width:'100%',
+          textAlign:'center',
+          fontSize:'12px',
+          fontWeight:'400',
+          color:'#6B7280',
+          marginTop:'4px',
+          letterSpacing:'.01em',
+          fontFamily:"'DM Sans',sans-serif",
+        }}>
+          Powered by <span style={{color:'#C0392B',fontWeight:'500'}}>MaxRx</span>
         </div>
         {phase === "welcome" && <Welcome onSelect={startQuiz} />}
         {phase === "question" && quiz && (
