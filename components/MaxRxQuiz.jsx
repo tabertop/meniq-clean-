@@ -1350,17 +1350,6 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
           </div>
           <div style={{
             fontSize:'11px',
-            color:'#9CA3AF',
-            letterSpacing:'.02em',
-            lineHeight:1.4,
-            marginBottom:'4px',
-            textAlign:'center',
-            width:'100%',
-          }}>
-            Powered by <span style={{fontWeight:'600',color:'#C0392B'}}>MaxRx</span>
-          </div>
-          <div style={{
-            fontSize:'11px',
             color:'#6B7280',
             letterSpacing:'.02em',
             lineHeight:1.4,
