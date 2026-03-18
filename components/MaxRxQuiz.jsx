@@ -1405,20 +1405,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             <div style={{fontSize:'12px',color:'#6B7280',textAlign:'center',margin:'8px 0 0',letterSpacing:'.01em'}}>{cue}</div>
           ) : null;
         })()}
-        {isTikTok && pickKey !== null && (
-          <button
-            style={{
-              width:'100%', padding:'15px', marginTop:'14px',
-              background:'var(--red)', border:'none', borderRadius:'14px',
-              color:'white', fontSize:'16px', fontWeight:'600',
-              fontFamily:"'DM Sans', sans-serif", cursor:'pointer',
-              letterSpacing:'.02em',
-            }}
-            onClick={() => onNext({ ...answers, [q.id]: answers[q.id] })}
-          >
-            {qIndex + 1 === quiz.questions.length ? 'See My Score →' : 'Continue →'}
-          </button>
-        )}
+
         {qIndex > 0 && (
           <div className="mrx-nav">
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
