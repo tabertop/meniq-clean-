@@ -1878,6 +1878,7 @@ export default function MaxRxQuiz() {
     <div className="mrx-root">
       <style>{CSS}</style>
       <div className="mrx-app">
+        <div style={{position:'sticky',top:0,zIndex:10,background:'var(--bg)',paddingBottom:'4px'}}>
         <div className="mrx-logo">
           <svg width="100%" height="30" viewBox="0 0 440 76" xmlns="http://www.w3.org/2000/svg" style={{width:'100%',maxWidth:'180px',display:'block',margin:'0 auto'}}>
             <polyline points="4,56 20,56 29,38 38,68 47,18 56,56 72,56"
@@ -1901,6 +1902,7 @@ export default function MaxRxQuiz() {
             Powered by <span style={{color:'#C0392B',fontWeight:'500'}}>MaxRx</span>
           </div>
         )}
+        </div>
         {phase === "welcome" && <Welcome onSelect={startQuiz} />}
         {phase === "question" && quiz && (
           <Question
