@@ -1307,7 +1307,7 @@ function Welcome({ onSelect }) {
               <span className="mrx-card-arr">›</span>
             </button>
           </div>
-          <p className="mrx-disc">Results are informational only. Not medical advice. Your data is never sold.</p>
+          <p className="mrx-disc">This assessment is for informational purposes only and is not a medical diagnosis. Treatment, if appropriate, is provided by a licensed healthcare provider.</p>
         </div>
       </div>
     </div>
@@ -1387,6 +1387,9 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
               </button>
             );
           })}
+        </div>
+        <div style={{fontSize:'12px',color:'#6B7280',lineHeight:1.45,textAlign:'center',maxWidth:'90%',margin:'16px auto 0'}}>
+          This assessment is for informational purposes only and is not a medical diagnosis. Treatment, if appropriate, is provided by a licensed healthcare provider.
         </div>
         {qIndex > 0 && (
           <div className="mrx-nav">
