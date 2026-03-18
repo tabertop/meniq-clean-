@@ -1368,9 +1368,6 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
         <div className="mrx-qhead">
           <div className="mrx-qnum">{isTikTok ? (() => {
             const s = qIndex + 1, t = quiz.questions.length;
-            if (s === t)     return `Question ${s} of ${t} — Final question`;
-            if (s === t - 1) return `Question ${s} of ${t} — Almost there`;
-            if (s === t - 2) return `Question ${s} of ${t} — Almost done`;
             return `Question ${s} of ${t}`;
           })() : `Step ${qIndex + 1} of ${quiz.questions.length}`}</div>
           <div className="mrx-qtext">{q.text}</div>
@@ -1393,7 +1390,6 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
         </div>
         {isTikTok && (() => {
           const s = qIndex + 1, t = quiz.questions.length;
-          const cue = s === t ? 'Final question' : s === t-1 ? 'Just one more after this' : s === t-2 ? "Quick check — you're almost done" : null;
           return cue ? (
             <div style={{fontSize:'12px',color:'#6B7280',textAlign:'center',margin:'8px 0 0',letterSpacing:'.01em'}}>{cue}</div>
           ) : null;
