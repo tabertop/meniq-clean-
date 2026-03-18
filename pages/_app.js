@@ -20,9 +20,6 @@ export default function App({ Component, pageProps }) {
         `}} />
       </Head>
       <Component {...pageProps} />
-      <div style={{fontSize:'12px',color:'#6B7280',lineHeight:1.45,textAlign:'center',maxWidth:'520px',margin:'28px auto 24px',padding:'0 20px',fontFamily:"'DM Sans',sans-serif"}}>
-        This assessment is for informational purposes only and is not a medical diagnosis. Treatment, if appropriate, is provided by a licensed healthcare provider.
-      </div>
     </>
   )
 }
