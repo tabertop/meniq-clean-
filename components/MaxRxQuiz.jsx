@@ -1882,6 +1882,7 @@ export default function MaxRxQuiz() {
             fontWeight:'400',
             color:'#6B7280',
             marginTop:'6px',
+            paddingLeft:'28px',
             letterSpacing:'.01em',
             fontFamily:"'DM Sans',sans-serif",
           }}>
