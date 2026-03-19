@@ -1720,6 +1720,9 @@ function Result({ quiz, result, tracking, onRestart }) {
             background: getScoreColor(result.confidence)
           }} />
         </div>
+        <div style={{fontSize:'11px',color:'#444',textAlign:'center',marginTop:'10px',letterSpacing:'.02em'}}>
+          Based on your responses · Not a medical diagnosis
+        </div>
       </div>
       <div className="mrx-bullets">
         {result.bullets.slice(0, 2).map((b, i) => (
