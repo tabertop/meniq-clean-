@@ -674,7 +674,59 @@ const QUIZZES = {
 // TikTok variant — ED quiz without question #3 (progression)
 QUIZZES.ed_tiktok = {
   ...QUIZZES.ed,
-  questions: QUIZZES.ed.questions.filter(q => q.id !== 'progression'),
+  title: "Bedroom Confidence Score",
+  questions: [
+    {
+      id: "age",
+      text: "How old are you?",
+      options: [
+        { label: "18–29", value: 0 },
+        { label: "30–44", value: 1 },
+        { label: "45–59", value: 2 },
+        { label: "60+", value: 3 },
+      ],
+    },
+    {
+      id: "frequency",
+      text: "How would you honestly rate your bedroom confidence lately?",
+      options: [
+        { label: "Never been better", value: 0 },
+        { label: "Pretty good — minor things here and there", value: 1 },
+        { label: "Hit or miss — inconsistent", value: 2 },
+        { label: "Struggling more than I'd like to admit", value: 3 },
+      ],
+    },
+    {
+      id: "stress",
+      text: "How's your energy and drive been lately?",
+      options: [
+        { label: "High energy, feeling sharp", value: 0 },
+        { label: "Decent but noticeable dips", value: 1 },
+        { label: "Running on empty most days", value: 2 },
+        { label: "Burned out", value: 3 },
+      ],
+    },
+    {
+      id: "morning",
+      text: "In the morning, how do you typically wake up?",
+      options: [
+        { label: "Ready to go — consistently", value: 0 },
+        { label: "Occasionally", value: 1 },
+        { label: "Rarely these days", value: 2 },
+        { label: "Never really happens", value: 3 },
+      ],
+    },
+    {
+      id: "treatment",
+      text: "If there was a proven, private fix — would you want to know about it?",
+      options: [
+        { label: "100% — tell me now", value: 0 },
+        { label: "Yes, if it's truly discreet", value: 0 },
+        { label: "Maybe, I want to learn more first", value: 1 },
+        { label: "Not sure yet", value: 1 },
+      ],
+    },
+  ],
 };
 
 
