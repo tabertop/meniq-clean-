@@ -1052,10 +1052,9 @@ const CSS = `
     margin-bottom: 14px;
   }
   .mrx-score-brand {
-    font-size: 10px; font-weight: 700; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--muted);
+    font-size: 15px; font-weight: 600; letter-spacing: .02em;
+    text-transform: none; color: #9CA3AF; margin-top: 2px;
   }
-  .mrx-score-brand span { color: var(--red-bright); }
   .mrx-score-display {
     display: flex; align-items: baseline; gap: 4px;
   }
@@ -1706,13 +1705,13 @@ function Result({ quiz, result, tracking, onRestart }) {
       <p className="mrx-rexp">{result.explanation}</p>
       <div className="mrx-conf">
         <div className="mrx-score-header">
-          <div className="mrx-score-brand">Men<span>IQ</span> Score</div>
           <div className="mrx-score-display">
             <span className="mrx-score-num" style={{ color: getScoreColor(result.confidence) }}>
               {result.confidence}
             </span>
             <span className="mrx-score-denom">/ 100</span>
           </div>
+          <div className="mrx-score-brand">Your Score</div>
         </div>
         <div className="mrx-score-category">{getMenIQCategory(quiz.id, result.confidence)}</div>
         <div className="mrx-ctrack">
