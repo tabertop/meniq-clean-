@@ -13,7 +13,7 @@ export default function TikTok() {
         })
       }
     } catch (_) {}
-    router.replace('/?quiz=ed&utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok')
+    router.replace('/?quiz=ed_tiktok&utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok')
   }, []) // eslint-disable-line
   return <Head><meta name="robots" content="noindex, nofollow" /></Head>
 }
