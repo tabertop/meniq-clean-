@@ -698,7 +698,7 @@ QUIZZES.ed_tiktok = {
     },
     {
       id: "morning",
-      text: "In the morning, how do you typically wake up?",
+      text: "How often do you wake up with morning readiness?",
       options: [
         { label: "Never really happens", value: 3 },
         { label: "Rarely these days", value: 2 },
