@@ -1371,7 +1371,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
 
   return (
     <>
-      {isTikTok && (
+      {isTikTok && qIndex === 0 && (
         <div style={{
           width:'100%',
           padding:'14px 0 2px',
@@ -1409,8 +1409,10 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
       <div className="mrx-screen">
         <div className="mrx-qhead">
           <div className="mrx-qnum">{isTikTok ? (() => {
-            const s = qIndex + 1, t = quiz.questions.length;
-            return `Question ${s} of ${t}`;
+            const t = quiz.questions.length;
+            const s = qIndex + 1;
+            const suffix = s === t ? ' — Final question' : s === t - 1 ? ' — Almost there' : s >= Math.ceil(t / 2) ? ' — Almost done' : '';
+            return `Question ${s} of ${t}${suffix}`;
           })() : `Step ${qIndex + 1} of ${quiz.questions.length}`}</div>
           <div className="mrx-qtext">{q.text}</div>
         </div>
