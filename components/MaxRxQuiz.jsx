@@ -1061,7 +1061,7 @@ const CSS = `
   }
   .mrx-score-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 56px; line-height: 1; color: var(--text); letter-spacing: -.01em;
+    font-size: 88px; line-height: 1; letter-spacing: -.02em;
   }
   .mrx-score-denom {
     font-size: 16px; color: #555; font-weight: 400; line-height: 1;
@@ -1742,6 +1742,25 @@ function Result({ quiz, result, tracking, onRestart }) {
             A licensed provider can review your answers online.
           </p>
           <p className="mrx-cta-support-line">Most visits take only a few minutes.</p>
+        </div>
+        <div style={{
+          display:'flex', alignItems:'center', justifyContent:'center',
+          gap:'8px', marginBottom:'12px',
+        }}>
+          <div style={{
+            display:'flex', gap:'-4px',
+          }}>
+            {['#E74C3C','#C0392B','#922B21'].map((c,i) => (
+              <div key={i} style={{
+                width:'24px', height:'24px', borderRadius:'50%',
+                background:c, border:'2px solid #0A0A0A',
+                marginLeft: i > 0 ? '-6px' : '0',
+              }} />
+            ))}
+          </div>
+          <div style={{fontSize:'12px', color:'#9CA3AF', letterSpacing:'.01em'}}>
+            Join <span style={{color:'#F0EDE8', fontWeight:'500'}}>10,000+ men</span> who've started their free visit
+          </div>
         </div>
         <a className="mrx-cta" href={ctaUrl} onClick={handleCTA} rel="noopener noreferrer">
           {quiz.ctaLabel} →
