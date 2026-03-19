@@ -1048,15 +1048,15 @@ const CSS = `
     background: linear-gradient(90deg, var(--red-dim), var(--red-bright));
   }
   .mrx-score-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 14px;
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 14px; text-align: center;
   }
   .mrx-score-brand {
-    font-size: 15px; font-weight: 600; letter-spacing: .02em;
-    text-transform: none; color: #9CA3AF; margin-top: 2px;
+    font-size: 14px; font-weight: 500; letter-spacing: .04em;
+    text-transform: uppercase; color: #6B7280; margin-top: 4px;
   }
   .mrx-score-display {
-    display: flex; align-items: baseline; gap: 4px;
+    display: flex; align-items: baseline; gap: 4px; justify-content: center;
   }
   .mrx-score-num {
     font-family: 'Bebas Neue', sans-serif;
