@@ -1388,14 +1388,14 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             );
           })}
         </div>
-        <div style={{fontSize:'12px',color:'#6B7280',lineHeight:1.45,textAlign:'center',maxWidth:'90%',margin:'16px auto 0'}}>
-          This assessment is for informational purposes only and is not a medical diagnosis. Treatment, if appropriate, is provided by a licensed healthcare provider.
-        </div>
         {qIndex > 0 && (
           <div className="mrx-nav">
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
           </div>
         )}
+        <div style={{fontSize:'12px',color:'#6B7280',lineHeight:1.45,textAlign:'center',maxWidth:'90%',margin:'20px auto 24px'}}>
+          This assessment is for informational purposes only and is not a medical diagnosis. Treatment, if appropriate, is provided by a licensed healthcare provider.
+        </div>
       </div>
     </>
   );
