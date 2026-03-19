@@ -799,7 +799,7 @@ const CSS = `
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 24px 40px;
+    padding: 0 24px 16px;
     animation: mrxSlide .3s ease forwards;
   }
   @keyframes mrxSlide {
@@ -1393,7 +1393,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
           </div>
         )}
-        <div style={{fontSize:'12px',color:'#6B7280',lineHeight:1.45,textAlign:'center',maxWidth:'90%',margin:'6px auto 20px'}}>
+        <div style={{fontSize:'12px',color:'#6B7280',lineHeight:1.45,textAlign:'center',maxWidth:'90%',margin:'4px auto 12px'}}>
           This assessment is for informational purposes only and is not a medical diagnosis. Treatment, if appropriate, is provided by a licensed healthcare provider.
         </div>
       </div>
