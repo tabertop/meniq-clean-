@@ -676,6 +676,7 @@ QUIZZES.ed_tiktok = {
   ...QUIZZES.ed,
   title: "Bedroom Confidence Score",
   questions: [
+    {
       id: "frequency",
       text: "How would you honestly rate your bedroom confidence lately?",
       options: [
