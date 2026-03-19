@@ -1009,7 +1009,6 @@ const CSS = `
   .mrx-step-indicator { font-size: 12px; color: #6B7280; letter-spacing: .04em; margin: 10px 0 14px; }
   .mrx-friction-line { font-size: 13px; color: var(--muted); text-align: center; line-height: 1.6; margin: 0 0 14px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
   .mrx-avail-row { display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .mrx-avail-dot { width: 7px; height: 7px; border-radius: 50%; background: #34C759; flex-shrink: 0; }
   .mrx-avail-sub { font-size: 13px; color: var(--muted); }
 
   .mrx-privacy-strip { font-size: 11px; color: #9CA3AF; text-align: center; margin: 8px 0 0; letter-spacing: .02em; }
@@ -1021,7 +1020,6 @@ const CSS = `
     font-size: 14px; color: #888; line-height: 1.6;
     margin: 0; text-align: center; font-weight: 400;
   }
-  .mrx-cta-avail {
     display: flex; align-items: center; justify-content: center; gap: 8px;
   }
   .mrx-trust-strip {
@@ -1719,10 +1717,9 @@ function Result({ quiz, result, tracking, onRestart }) {
             background: getScoreColor(result.confidence)
           }} />
         </div>
-        <div className="mrx-score-footnote">Based on your responses · Not a medical diagnosis</div>
       </div>
       <div className="mrx-bullets">
-        {result.bullets.map((b, i) => (
+        {result.bullets.slice(0, 2).map((b, i) => (
           <div key={i} className="mrx-bullet">
             <span className="mrx-bicon">
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
@@ -1737,9 +1734,6 @@ function Result({ quiz, result, tracking, onRestart }) {
       {/* PRIMARY CTA — placed directly after bullets, above fold on mobile */}
       <div className="mrx-cta-block">
         <div className="mrx-cta-support">
-          <p className="mrx-cta-support-line mrx-cta-avail">
-            <span className="mrx-avail-dot" />
-            A licensed provider can review your answers online.
           </p>
           <p className="mrx-cta-support-line">Most visits take only a few minutes.</p>
         </div>
