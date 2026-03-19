@@ -270,7 +270,7 @@ const QUIZZES = {
       {
         key: "treatment",
         range: [15, 100],
-        headline: "Your score qualifies you for treatment — start today",
+        headline: "Your score may qualify you for treatment — get a free medical visit",
         emoji: "🔴",
         explanation:
           "Based on your responses, treatment is the clear next step — and it's more accessible than you think. Thousands of men start their free visit every week.",
