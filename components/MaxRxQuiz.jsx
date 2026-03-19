@@ -799,7 +799,7 @@ const CSS = `
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 24px 16px;
+    padding: 0 24px 4px;
     animation: mrxSlide .3s ease forwards;
   }
   @keyframes mrxSlide {
@@ -1393,7 +1393,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
           </div>
         )}
-        <div style={{fontSize:'12px',color:'#6B7280',lineHeight:1.45,textAlign:'center',maxWidth:'90%',margin:'4px auto 12px'}}>
+        <div style={{fontSize:'12px',color:'#6B7280',lineHeight:1.45,textAlign:'center',maxWidth:'90%',margin:'4px auto 8px'}}>
           This assessment is for informational purposes only and is not a medical diagnosis. Treatment, if appropriate, is provided by a licensed healthcare provider.
         </div>
       </div>
@@ -1854,7 +1854,7 @@ export default function MaxRxQuiz() {
       <style>{CSS}</style>
       <div className="mrx-app">
         <div className="mrx-logo">
-          <svg width="100%" height="30" viewBox="0 0 440 76" xmlns="http://www.w3.org/2000/svg" style={{width:'100%',maxWidth:'180px',display:'block',margin:'0 auto'}}>
+          <svg width="100%" height="30" viewBox="0 0 440 76" xmlns="http://www.w3.org/2000/svg" style={{width:'100%',maxWidth:'180px',display:'block',margin:'4px auto 8px'}}>
             <polyline points="4,56 20,56 29,38 38,68 47,18 56,56 72,56"
               fill="none" stroke="#c0392b" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round"/>
             <text x="82" y="58" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="54" letterSpacing="-1">
