@@ -228,56 +228,56 @@ const QUIZZES = {
       {
         key: "occasional",
         range: [0, 5],
-        headline: "Occasional Dip - Easy to Address",
+        headline: "You're closer to a fix than you think",
         emoji: "🟢",
         explanation:
-          "Your responses suggest stress or lifestyle factors are the likely cause. The good news: occasional ED is extremely common and very treatable.",
+          "Good news — your profile suggests this is very fixable, fast. Most men in your situation see a real difference within days of starting treatment.",
         bullets: [
-          "Likely tied to stress or sleep quality",
-          "Strong baseline - minor intervention may be all you need",
-          "Most men in your profile see results in days",
+          "Most men with your profile respond quickly to treatment",
+          "A minor intervention may be all you need",
+          "Private, fast, and easier than you think to get started",
         ],
         confidence: 72,
       },
       {
         key: "stress",
         range: [6, 10],
-        headline: "Stress-Linked Pattern Detected",
+        headline: "This is more common — and more fixable — than most men realize",
         emoji: "🟡",
         explanation:
-          "Your profile shows a stress-performance link. When your mind is under pressure, it affects your body. A targeted approach can break this cycle fast.",
+          "Your body and mind are connected — when stress builds, performance suffers. The good news: this pattern responds very well to treatment.",
         bullets: [
-          "Performance anxiety amplifies the issue",
-          "Psychological and physical factors intertwined",
-          "Treatment + habit shifts can restore confidence quickly",
+          "Men with this profile see strong results with treatment",
+          "Breaking the cycle is faster than most expect",
+          "Discreet online visit — no awkward conversations required",
         ],
         confidence: 81,
       },
       {
         key: "progressive",
         range: [11, 14],
-        headline: "Progressive Pattern - Act Now",
+        headline: "Your body is telling you something. Here's what to do.",
         emoji: "🟠",
         explanation:
-          "Your results suggest a worsening pattern that won't resolve on its own. The earlier you address this, the better - and modern treatment is highly effective.",
+          "Your results show a clear pattern — and the earlier you act, the better your outcome. Modern treatment is highly effective and completely private.",
         bullets: [
-          "Condition has been progressing over time",
-          "Morning erection frequency is a key clinical signal",
-          "FDA-approved options have 80%+ success rates",
+          "Early action leads to significantly better outcomes",
+          "FDA-approved options work for 80%+ of men",
+          "A licensed provider can review your case today — privately",
         ],
         confidence: 88,
       },
       {
         key: "treatment",
         range: [15, 100],
-        headline: "Treatment Strongly Recommended",
+        headline: "Your score qualifies you for treatment — start today",
         emoji: "🔴",
         explanation:
-          "Based on your responses, professional evaluation and medical treatment is the clear next step. Don't wait - this is highly treatable and very private.",
+          "Based on your responses, treatment is the clear next step — and it's more accessible than you think. Thousands of men start their free visit every week.",
         bullets: [
-          "Multiple clinical signals present",
-          "Discreet online consultation available today",
-          "No awkward in-person visits required",
+          "Join thousands of men who've already taken this step",
+          "Licensed U.S. providers — discreet, fast, private",
+          "Most visits take under 10 minutes to complete",
         ],
         confidence: 94,
       },
@@ -676,17 +676,6 @@ QUIZZES.ed_tiktok = {
   ...QUIZZES.ed,
   title: "Bedroom Confidence Score",
   questions: [
-    {
-      id: "age",
-      text: "How old are you?",
-      options: [
-        { label: "18–29", value: 0 },
-        { label: "30–44", value: 1 },
-        { label: "45–59", value: 2 },
-        { label: "60+", value: 3 },
-      ],
-    },
-    {
       id: "frequency",
       text: "How would you honestly rate your bedroom confidence lately?",
       options: [
