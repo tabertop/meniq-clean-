@@ -678,12 +678,12 @@ QUIZZES.ed_tiktok = {
   questions: [
     {
       id: "frequency",
-      text: "How would you honestly rate your bedroom confidence lately?",
+      text: "How have things felt in the bedroom lately?",
       options: [
-        { label: "Struggling more than I'd like to admit", value: 3 },
-        { label: "Hit or miss — inconsistent", value: 2 },
-        { label: "Pretty good — minor things here and there", value: 1 },
-        { label: "Never been better", value: 0 },
+        { label: "Not where I want them to be", value: 3 },
+        { label: "Hit or miss lately", value: 2 },
+        { label: "Mostly good with a few dips", value: 1 },
+        { label: "Strong and consistent", value: 0 },
       ],
     },
     {
