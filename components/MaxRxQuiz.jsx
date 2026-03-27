@@ -821,7 +821,7 @@ const CSS = `
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 24px 72px;
+    padding: 0 24px 4px;
     animation: mrxSlide .3s ease forwards;
   }
   @keyframes mrxSlide {
@@ -1414,6 +1414,22 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             );
           })}
         </div>
+        <a
+          href="https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok"
+          rel="noopener noreferrer"
+          style={{
+            display:'flex', alignItems:'center', justifyContent:'center',
+            width:'100%', height:'52px',
+            background:'#111', borderRadius:'12px',
+            border:'1px solid rgba(255,255,255,.08)',
+            color:'#fff', fontFamily:"'DM Sans',sans-serif",
+            fontSize:'15px', fontWeight:'600',
+            textDecoration:'none', letterSpacing:'.01em',
+            margin:'20px 0 4px',
+          }}
+        >
+          {qIndex >= 2 ? '⚡ You may qualify — continue →' : '⚡ See if you qualify →'}
+        </a>
         {qIndex > 0 && (
           <div className="mrx-nav" style={{marginTop:'8px'}}>
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
@@ -1423,23 +1439,6 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
           This assessment is for informational purposes only and is not a medical diagnosis. Treatment, if appropriate, is provided by a licensed healthcare provider.
         </div>
       </div>
-      {/* Sticky bottom CTA */}
-      <a
-        href="https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok"
-        rel="noopener noreferrer"
-        style={{
-          position:'fixed', bottom:0, left:0, right:0,
-          height:'56px', background:'#111',
-          borderTop:'1px solid rgba(255,255,255,.08)',
-          display:'flex', alignItems:'center', justifyContent:'center',
-          color:'#fff', fontFamily:"'DM Sans',sans-serif",
-          fontSize:'15px', fontWeight:'600',
-          textDecoration:'none', zIndex:9999,
-          letterSpacing:'.01em',
-        }}
-      >
-        {qIndex >= 2 ? '⚡ You may qualify — continue →' : '⚡ See if you qualify →'}
-      </a>
     </>
   );
 }
