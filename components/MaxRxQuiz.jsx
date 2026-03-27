@@ -1334,7 +1334,7 @@ function Welcome({ onSelect }) {
   );
 }
 
-function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok, onEarlyExit }) {
+function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok }) {
   const q = quiz.questions[qIndex];
   if (!q) return null;
   const pickKey = answers._lastPick || "";
@@ -1413,8 +1413,9 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok, o
             );
           })}
         </div>
-        <button
-          onClick={onEarlyExit}
+        <a
+          href="https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok"
+          rel="noopener noreferrer"
           style={{
             display:'flex', alignItems:'center', justifyContent:'center',
             width:'100%', height:'52px',
@@ -1422,12 +1423,12 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok, o
             border:'1px solid rgba(255,255,255,.08)',
             color:'#fff', fontFamily:"'DM Sans',sans-serif",
             fontSize:'15px', fontWeight:'600',
-            cursor:'pointer', letterSpacing:'.01em',
+            textDecoration:'none', letterSpacing:'.01em',
             margin:'20px 0 4px',
           }}
         >
           {qIndex >= 2 ? '⚡ You may qualify — continue →' : '⚡ See if you qualify →'}
-        </button>
+        </a>
         {qIndex > 0 && (
           <div className="mrx-nav" style={{marginTop:'8px'}}>
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
@@ -1924,7 +1925,7 @@ export default function MaxRxQuiz() {
         {phase === "question" && quiz && (
           <Question
             quiz={quiz} qIndex={qIndex} answers={answers}
-            onAnswer={handleAnswer} onNext={handleNext} onBack={handleBack} onEarlyExit={handleCTA}
+            onAnswer={handleAnswer} onNext={handleNext} onBack={handleBack}
             isTikTok={typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('utm_source') === 'tiktok'}
           />
         )}
