@@ -1335,12 +1335,6 @@ function Welcome({ onSelect }) {
 }
 
 function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok }) {
-  const [isRedirecting, setIsRedirecting] = React.useState(false);
-  function handleEarlyExit() {
-    if (isRedirecting) return;
-    setIsRedirecting(true);
-    setTimeout(() => { window.location.href = 'https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok'; }, 1000);
-  }
   const q = quiz.questions[qIndex];
   if (!q) return null;
   const pickKey = answers._lastPick || "";
@@ -1419,31 +1413,19 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             );
           })}
         </div>
-        <button
-          onClick={handleEarlyExit}
-          disabled={isRedirecting}
+        <a
+          href="https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok"
+          rel="noopener noreferrer"
           style={{
             display:'flex', alignItems:'center', justifyContent:'center',
-            width:'100%', height:'52px',
-            background: isRedirecting ? '#222' : '#111',
-            borderRadius:'12px',
+            width:'100%', height:'52px', background:'#111', borderRadius:'12px',
             border:'1px solid rgba(255,255,255,.08)', color:'#fff',
             fontFamily:"'DM Sans',sans-serif", fontSize:'15px', fontWeight:'600',
-            cursor: isRedirecting ? 'not-allowed' : 'pointer',
-            letterSpacing:'.01em', margin:'20px 0 4px',
-            opacity: isRedirecting ? 0.8 : 1,
-            transition:'all .2s',
+            textDecoration:'none', letterSpacing:'.01em', margin:'20px 0 4px',
           }}
         >
-          {isRedirecting
-            ? '⏳ Connecting you…'
-            : qIndex >= 2 ? '⚡ You may qualify — continue →' : '⚡ See if you qualify →'}
-        </button>
-        {isRedirecting && (
-          <p style={{fontSize:'11px',color:'#6B7280',textAlign:'center',margin:'-2px 0 4px',letterSpacing:'.01em'}}>
-            Preparing secure provider intake
-          </p>
-        )}
+          {qIndex >= 2 ? '⚡ You may qualify — continue →' : '⚡ See if you qualify →'}
+        </a>
         {qIndex > 0 && (
           <div className="mrx-nav" style={{marginTop:'8px'}}>
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
