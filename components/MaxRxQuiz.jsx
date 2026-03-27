@@ -1414,7 +1414,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
           })}
         </div>
         <a
-          href="https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok"
+          href={quiz.ctaBase + '?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok'}
           rel="noopener noreferrer"
           style={{
             display:'flex', alignItems:'center', justifyContent:'center',
