@@ -818,7 +818,6 @@ const CSS = `
 
   /* Screen transition */
   .mrx-screen {
-    flex: 1;
     display: flex;
     flex-direction: column;
     padding: 0 24px 4px;
