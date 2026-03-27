@@ -1759,13 +1759,17 @@ function Result({ quiz, result, tracking, onRestart }) {
         <a className="mrx-cta" href={ctaUrl} onClick={handleCTA} rel="noopener noreferrer">
           {quiz.ctaLabel} →
         </a>
-        <div style={{textAlign:'center',marginTop:'10px',fontSize:'10px',color:'#555',letterSpacing:'.01em',lineHeight:'1.6'}}>
-          <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'5px',flexWrap:'nowrap',whiteSpace:'nowrap'}}>
-            <span>Private online visit</span>
-            <span className="mrx-trust-dot" />
-            <span>Licensed U.S. providers</span>
-          </div>
-          <div>Discreet treatment options</div>
+        <div style={{
+          textAlign:'center', marginTop:'10px',
+          fontSize:'10px', color:'#555',
+          letterSpacing:'-.01em', whiteSpace:'nowrap',
+          overflow:'hidden', textOverflow:'ellipsis',
+        }}>
+          <span>Private online visit</span>
+          <span className="mrx-trust-dot" />
+          <span>Licensed U.S. providers</span>
+          <span className="mrx-trust-dot" />
+          <span>Discreet treatment options</span>
         </div>
       </div>
 
