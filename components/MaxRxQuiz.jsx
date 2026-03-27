@@ -919,10 +919,10 @@ const CSS = `
   .mrx-qtext { font-family: 'Bebas Neue', sans-serif; font-size: 34px; line-height: 1.05; color: var(--text); }
   .mrx-opts { display: flex; flex-direction: column; gap: 10px; flex: 1; }
   .mrx-opt {
-    background: var(--surface); border: 1px solid var(--border);
+    background: var(--surface); border: 1px solid rgba(255,255,255,.08);
     border-radius: 12px; padding: 16px 18px;
     cursor: pointer; color: var(--text); font-family: 'DM Sans', sans-serif;
-    font-size: 15px; font-weight: 400; line-height: 1.4;
+    font-size: 15px; font-weight: 400; opacity: 0.82; line-height: 1.4;
     transition: all .15s ease; position: relative; overflow: hidden;
     display: flex; align-items: center; gap: 12px; text-align: left; width: 100%;
   }
@@ -1418,10 +1418,11 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
           rel="noopener noreferrer"
           style={{
             display:'flex', alignItems:'center', justifyContent:'center',
-            width:'100%', height:'52px', background:'#111', borderRadius:'12px',
-            border:'1px solid rgba(255,255,255,.08)', color:'#fff',
+            width:'100%', height:'58px', background:'#180f0d', borderRadius:'12px',
+            border:'1px solid rgba(192,57,43,.5)', color:'#fff',
             fontFamily:"'DM Sans',sans-serif", fontSize:'15px', fontWeight:'600',
-            textDecoration:'none', letterSpacing:'.01em', margin:'20px 0 4px',
+            textDecoration:'none', letterSpacing:'.02em', margin:'24px 0 4px',
+            boxShadow:'0 4px 20px rgba(192,57,43,.15), inset 0 1px 0 rgba(255,255,255,.04)',
           }}
           onClick={() => {
             try { if(window.gtag) window.gtag('event','click_quiz_cta',{event_category:'quiz',event_label:'see_if_you_qualify'}); } catch(_){}
