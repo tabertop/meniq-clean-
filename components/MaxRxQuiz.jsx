@@ -1428,7 +1428,11 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             fireTTQ('InitiateCheckout',{contents:[{content_id:'quiz_early_cta',content_type:'product',content_name:'See If You Qualify'}]});
           }}
         >
-          {qIndex >= 2 ? '⚡ You may qualify — continue →' : '⚡ See if you qualify →'}
+          {qIndex === quiz.questions.length - 1
+            ? '⚡ Continue to provider review →'
+            : qIndex >= 2
+              ? '⚡ You may qualify — continue →'
+              : '⚡ See if you qualify →'}
         </a>
         {qIndex > 0 && (
           <div className="mrx-nav" style={{marginTop:'8px'}}>
