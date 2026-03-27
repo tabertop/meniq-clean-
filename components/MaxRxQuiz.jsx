@@ -821,7 +821,7 @@ const CSS = `
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 24px 4px;
+    padding: 0 24px 72px;
     animation: mrxSlide .3s ease forwards;
   }
   @keyframes mrxSlide {
@@ -1385,6 +1385,9 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
         </div>
       )}
       <ProgressBar current={qIndex + 1} total={quiz.questions.length} title={quiz.title} isTikTok={isTikTok} />
+      <div style={{textAlign:'center',fontSize:'12px',color:'#6B7280',padding:'4px 0 2px',letterSpacing:'.01em'}}>
+        Powered by MaxRx — Licensed U.S. Providers
+      </div>
       <div className="mrx-screen">
         <div className="mrx-qhead">
           <div className="mrx-qnum">{isTikTok ? (() => {
@@ -1420,6 +1423,23 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
           This assessment is for informational purposes only and is not a medical diagnosis. Treatment, if appropriate, is provided by a licensed healthcare provider.
         </div>
       </div>
+      {/* Sticky bottom CTA */}
+      <a
+        href="https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok"
+        rel="noopener noreferrer"
+        style={{
+          position:'fixed', bottom:0, left:0, right:0,
+          height:'56px', background:'#111',
+          borderTop:'1px solid rgba(255,255,255,.08)',
+          display:'flex', alignItems:'center', justifyContent:'center',
+          color:'#fff', fontFamily:"'DM Sans',sans-serif",
+          fontSize:'15px', fontWeight:'600',
+          textDecoration:'none', zIndex:9999,
+          letterSpacing:'.01em',
+        }}
+      >
+        {qIndex >= 2 ? '⚡ You may qualify — continue →' : '⚡ See if you qualify →'}
+      </a>
     </>
   );
 }
