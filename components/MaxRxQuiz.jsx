@@ -1767,8 +1767,6 @@ function Result({ quiz, result, tracking, onRestart }) {
           <span>Private online visit</span>
           <span style={{margin:'0 6px'}}>•</span>
           <span>Licensed U.S. providers</span>
-          <span style={{margin:'0 6px'}}>•</span>
-          <span>Discreet treatment options</span>
         </div>
       </div>
 
