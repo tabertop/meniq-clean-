@@ -1267,21 +1267,6 @@ function ProgressBar({ current, total, title, isTikTok }) {
       <div className="mrx-ptrack" style={isTikTok ? {height:'7px'} : {}}>
         <div className="mrx-pfill" style={{width:`${pct}%`,...(isTikTok?{background:'linear-gradient(90deg,#c0392b,#ff4d3a)'}:{})}} />
       </div>
-      {earlyExit && (
-        <div className="mrx-transition-overlay">
-          <div className="mrx-overlay-spinner" />
-          <p className="mrx-transition-msg">Connecting you with a licensed provider…</p>
-          <p style={{fontSize:'13px',color:'#9CA3AF',textAlign:'center',maxWidth:'260px',lineHeight:1.5,margin:'-8px 0 0'}}>
-            Reviewing your answers and preparing personalized treatment options.
-          </p>
-          <div style={{display:'flex',flexDirection:'column',gap:'10px',marginTop:'8px',alignItems:'flex-start'}}>
-            <span style={{fontSize:'13px',color:'#22C55E',display:'flex',alignItems:'center',gap:'8px'}}>✓ Reviewing assessment answers</span>
-            <span style={{fontSize:'13px',color:'#22C55E',display:'flex',alignItems:'center',gap:'8px'}}>✓ Checking treatment eligibility</span>
-            <span style={{fontSize:'13px',color:'#22C55E',display:'flex',alignItems:'center',gap:'8px'}}>✓ Preparing provider recommendations</span>
-          </div>
-          <p style={{fontSize:'11px',color:'#555',marginTop:'8px'}}>🔒 Private &amp; secure connection</p>
-        </div>
-      )}
     </div>
   );
 }
@@ -1349,7 +1334,7 @@ function Welcome({ onSelect }) {
   );
 }
 
-function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok, onEarlyExit }) {
+function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok }) {
   const q = quiz.questions[qIndex];
   if (!q) return null;
   const pickKey = answers._lastPick || "";
@@ -1428,18 +1413,19 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok, o
             );
           })}
         </div>
-        <button
-          onClick={onEarlyExit}
+        <a
+          href="https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok"
+          rel="noopener noreferrer"
           style={{
             display:'flex', alignItems:'center', justifyContent:'center',
             width:'100%', height:'52px', background:'#111', borderRadius:'12px',
             border:'1px solid rgba(255,255,255,.08)', color:'#fff',
             fontFamily:"'DM Sans',sans-serif", fontSize:'15px', fontWeight:'600',
-            cursor:'pointer', letterSpacing:'.01em', margin:'20px 0 4px',
+            textDecoration:'none', letterSpacing:'.01em', margin:'20px 0 4px',
           }}
         >
           {qIndex >= 2 ? '⚡ You may qualify — continue →' : '⚡ See if you qualify →'}
-        </button>
+        </a>
         {qIndex > 0 && (
           <div className="mrx-nav" style={{marginTop:'8px'}}>
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
@@ -1871,15 +1857,6 @@ export default function MaxRxQuiz() {
   const [tracking] = useState(() => {
     try { return getTrackingParams(); } catch { return {}; }
   });
-  const [earlyExit, setEarlyExit] = useState(false);
-  const earlyFired = useState(false);
-  function handleEarlyExit() {
-    if (earlyFired[0]) return;
-    earlyFired[1](true);
-    fireTTQ('InitiateCheckout', { contents: [{ content_id: 'quiz_cta', content_name: 'See If You Qualify' }] });
-    setEarlyExit(true);
-    setTimeout(() => { window.location.href = 'https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok'; }, 2000);
-  }
   useEffect(() => { loadPAPScript(); }, []);
 
   const quiz = quizId ? QUIZZES[quizId] : null;
@@ -1945,7 +1922,7 @@ export default function MaxRxQuiz() {
         {phase === "question" && quiz && (
           <Question
             quiz={quiz} qIndex={qIndex} answers={answers}
-            onAnswer={handleAnswer} onNext={handleNext} onBack={handleBack} onEarlyExit={handleEarlyExit}
+            onAnswer={handleAnswer} onNext={handleNext} onBack={handleBack}
             isTikTok={typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('utm_source') === 'tiktok'}
           />
         )}
