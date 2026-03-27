@@ -1005,9 +1005,9 @@ const CSS = `
   }
   .mrx-trust-strip {
     display: flex; align-items: center; justify-content: center;
-    gap: 8px; flex-wrap: wrap;
-    margin-top: 10px; font-size: 11px; color: #555;
-    letter-spacing: .02em; text-align: center;
+    gap: 5px; flex-wrap: nowrap;
+    margin-top: 10px; font-size: 10px; color: #555;
+    letter-spacing: .01em; text-align: center;
   }
   .mrx-trust-dot {
     width: 4px; height: 4px; background: #888;
@@ -1753,18 +1753,19 @@ function Result({ quiz, result, tracking, onRestart }) {
             ))}
           </div>
           <div style={{fontSize:'12px', color:'#9CA3AF', letterSpacing:'.01em'}}>
-            Join <span style={{color:'#F0EDE8', fontWeight:'500'}}>10,000+ men</span> who've started their free visit
+            Join <span style={{color:'#F0EDE8', fontWeight:'500'}}>10,000+ men</span> who decided to fix this early
           </div>
         </div>
         <a className="mrx-cta" href={ctaUrl} onClick={handleCTA} rel="noopener noreferrer">
           {quiz.ctaLabel} →
         </a>
-        <div className="mrx-trust-strip">
-          <span>Private online visit</span>
-          <span className="mrx-trust-dot" />
-          <span>Licensed U.S. providers</span>
-          <span className="mrx-trust-dot" />
-          <span>Discreet treatment options</span>
+        <div style={{textAlign:'center',marginTop:'10px',fontSize:'10px',color:'#555',letterSpacing:'.01em',lineHeight:'1.6'}}>
+          <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'5px',flexWrap:'nowrap',whiteSpace:'nowrap'}}>
+            <span>Private online visit</span>
+            <span className="mrx-trust-dot" />
+            <span>Licensed U.S. providers</span>
+          </div>
+          <div>Discreet treatment options</div>
         </div>
       </div>
 
