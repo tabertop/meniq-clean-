@@ -1385,6 +1385,9 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
         </div>
       )}
       <ProgressBar current={qIndex + 1} total={quiz.questions.length} title={quiz.title} isTikTok={isTikTok} />
+      <div style={{textAlign:'center',fontSize:'12px',color:'#6B7280',padding:'4px 0 2px',letterSpacing:'.01em'}}>
+        Powered by MaxRx — Licensed U.S. Providers
+      </div>
       <div className="mrx-screen">
         <div className="mrx-qhead">
           <div className="mrx-qnum">{isTikTok ? (() => {
@@ -1411,6 +1414,22 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             );
           })}
         </div>
+        <a
+          href="https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok"
+          rel="noopener noreferrer"
+          style={{
+            display:'flex', alignItems:'center', justifyContent:'center',
+            width:'100%', height:'52px',
+            background:'#111', borderRadius:'12px',
+            border:'1px solid rgba(255,255,255,.08)',
+            color:'#fff', fontFamily:"'DM Sans',sans-serif",
+            fontSize:'15px', fontWeight:'600',
+            textDecoration:'none', letterSpacing:'.01em',
+            margin:'20px 0 4px',
+          }}
+        >
+          {qIndex >= 2 ? '⚡ You may qualify — continue →' : '⚡ See if you qualify →'}
+        </a>
         {qIndex > 0 && (
           <div className="mrx-nav" style={{marginTop:'8px'}}>
             <button className="mrx-back" onClick={onBack}>&#8592; Back</button>
