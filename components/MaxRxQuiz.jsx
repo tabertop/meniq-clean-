@@ -1735,7 +1735,7 @@ function Result({ quiz, result, tracking, onRestart }) {
       {/* PRIMARY CTA — placed directly after bullets, above fold on mobile */}
       <div className="mrx-cta-block">
         <div className="mrx-cta-support">
-          <p className="mrx-cta-support-line">Most visits take only a few minutes.</p>
+          <p className="mrx-cta-support-line">Treatment starts at $2/day</p>
         </div>
         <div style={{
           display:'flex', alignItems:'center', justifyContent:'center',
