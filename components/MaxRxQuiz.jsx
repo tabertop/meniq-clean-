@@ -1423,6 +1423,10 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             fontFamily:"'DM Sans',sans-serif", fontSize:'15px', fontWeight:'600',
             textDecoration:'none', letterSpacing:'.01em', margin:'20px 0 4px',
           }}
+          onClick={() => {
+            try { if(window.gtag) window.gtag('event','click_quiz_cta',{event_category:'quiz',event_label:'see_if_you_qualify'}); } catch(_){}
+            fireTTQ('InitiateCheckout',{contents:[{content_id:'quiz_early_cta',content_type:'product',content_name:'See If You Qualify'}]});
+          }}
         >
           {qIndex >= 2 ? '⚡ You may qualify — continue →' : '⚡ See if you qualify →'}
         </a>
