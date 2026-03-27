@@ -394,7 +394,7 @@ const QUIZZES = {
     id: "testosterone",
     title: "Is Your Testosterone Low?",
     subtitle: "Find out your T-level risk profile in 60 seconds",
-    ctaBase: "https://gomaxrx.com/products/edge",
+    ctaBase: "https://gomaxrx.com/mens-health-consult",
     ctaLabel: "Start My Free Visit",
     questions: [
       {
@@ -532,7 +532,7 @@ const QUIZZES = {
     title: "What Does Your Lover Really Think?",
     subtitle: "Love & Intimacy Confidence Score",
     ctaLabel: "Start My Free Visit",
-    ctaBase: "https://gomaxrx.com/products/edge",
+    ctaBase: "https://gomaxrx.com/mens-health-consult",
     questions: [
       {
         id: "initiate",
