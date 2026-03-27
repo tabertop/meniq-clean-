@@ -1761,20 +1761,19 @@ function Result({ quiz, result, tracking, onRestart }) {
         </a>
         <div style={{
           textAlign:'center', marginTop:'10px',
-          fontSize:'10px', color:'#555',
-          letterSpacing:'-.01em', whiteSpace:'nowrap',
-          overflow:'hidden', textOverflow:'ellipsis',
+          fontSize:'12px', color:'#555',
+          letterSpacing:'.01em',
         }}>
           <span>Private online visit</span>
-          <span className="mrx-trust-dot" />
+          <span style={{margin:'0 6px'}}>•</span>
           <span>Licensed U.S. providers</span>
-          <span className="mrx-trust-dot" />
+          <span style={{margin:'0 6px'}}>•</span>
           <span>Discreet treatment options</span>
         </div>
       </div>
 
       <PeerComparison quizId={quiz.id} ageBracket={result.ageBracket} />
-      <button className="mrx-cta2" onClick={onRestart}>Take a different quiz</button>
+      <button className="mrx-cta2" style={{marginTop:'16px'}} onClick={onRestart}>Take a different quiz</button>
       <div className="mrx-share-section">
         <div className="mrx-share-header">
           <p className="mrx-share-label">Share MenIQ.co with your friends</p>
