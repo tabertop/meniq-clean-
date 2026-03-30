@@ -1425,7 +1425,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
             boxShadow:'0 4px 20px rgba(192,57,43,.15), inset 0 1px 0 rgba(255,255,255,.04)',
           }}
           onClick={() => {
-            try { if(window.gtag) window.gtag('event','click_to_maxrx',{event_category:'quiz',event_label:'inline_cta'}); } catch(_){}
+            try { if(window.gtag) window.gtag('event','click_MaxRx_Quiz',{event_category:'quiz',event_label:'inline_cta'}); } catch(_){}
             fireTTQ('InitiateCheckout',{contents:[{content_id:'quiz_early_cta',content_type:'product',content_name:'See If You Qualify'}]});
           }}
         >
