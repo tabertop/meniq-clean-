@@ -1427,6 +1427,7 @@ function Question({ quiz, qIndex, answers, onAnswer, onNext, onBack, isTikTok })
           onClick={() => {
             try { if(window.gtag) window.gtag('event','click_MaxRx_Quiz',{event_category:'quiz',event_label:'inline_cta'}); } catch(_){}
             fireTTQ('InitiateCheckout',{contents:[{content_id:'quiz_early_cta',content_type:'product',content_name:'See If You Qualify'}]});
+            window.location.href = 'https://gomaxrx.com/mens-health-consult?utm_source=tiktok&utm_medium=organic&utm_campaign=tiktok';
           }}
         >
           {qIndex === quiz.questions.length - 1
@@ -1660,7 +1661,7 @@ function Result({ quiz, result, tracking, onRestart }) {
     // GA4 event
     try {
       if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-        window.gtag('event', 'click_to_maxrx', {
+        window.gtag('event', 'Click_2_MaxRx', {
           event_category: 'quiz',
           event_label: 'results_cta_click',
         });
