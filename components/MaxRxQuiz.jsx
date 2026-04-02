@@ -1661,7 +1661,7 @@ function Result({ quiz, result, tracking, onRestart }) {
     // GA4 event
     try {
       if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-        window.gtag('event', 'Click_2_MaxRx', {
+        window.gtag('event', 'click_to_maxrx', {
           event_category: 'quiz',
           event_label: 'results_cta_click',
         });
